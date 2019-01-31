@@ -31,7 +31,7 @@ public class StartController {
     }
 
     public void onLogin(ActionEvent actionEvent) {
-        /*Parent root = null;
+        Parent root = null;
         try {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
@@ -43,6 +43,6 @@ public class StartController {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 }
