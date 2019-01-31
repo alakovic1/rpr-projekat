@@ -1,0 +1,6 @@
+#start {
+    -fx-background-image: url("/img/main.jpg");
+    -fx-background-size: 900 300;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
