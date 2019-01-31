@@ -21,7 +21,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="420.0" layoutY="52.0" prefHeight="49.0" prefWidth="453.0" text="Login if you are an employee">
+      <Label alignment="CENTER" layoutX="420.0" layoutY="52.0" prefHeight="58.0" prefWidth="453.0" text="Login if you are an employee">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font name="Arial Italic" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="589.0" layoutY="99.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="30.0" prefWidth="106.0" text="Login">
+      <Button alignment="CENTER" layoutX="589.0" layoutY="106.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="30.0" prefWidth="106.0" text="Login">
          <font>
             <Font name="Arial Italic" size="14.0" />
          </font>
