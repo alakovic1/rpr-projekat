@@ -11,30 +11,20 @@
         <URL value="@/css/start.css" />
     </stylesheets>
    <children>
-      <Label alignment="CENTER" layoutY="1.0" prefHeight="51.0" prefWidth="900.0" text="RENT A CAR" textFill="#a61b1b">
+      <Label alignment="CENTER" layoutY="1.0" prefHeight="58.0" prefWidth="900.0" text="RENT A CAR" textFill="#a61b1b">
          <font>
             <Font name="Kefa Regular" size="48.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="24.0" layoutY="51.0" prefHeight="58.0" prefWidth="430.0" text="Register if you want to rent a car">
-         <font>
-            <Font name="Arial Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="420.0" layoutY="52.0" prefHeight="58.0" prefWidth="453.0" text="Login if you are an employee">
-         <font>
-            <Font name="Arial Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button alignment="CENTER" layoutX="187.0" layoutY="106.0" mnemonicParsing="false" onAction="#onRegistration" prefHeight="30.0" prefWidth="106.0" text="Register">
+      <Button alignment="CENTER" layoutX="372.0" layoutY="120.0" mnemonicParsing="false" onAction="#onRegistrationLogin" prefHeight="30.0" prefWidth="157.0" text="Register / Login">
          <font>
             <Font name="Arial Italic" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="589.0" layoutY="106.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="30.0" prefWidth="106.0" text="Login">
+      <Label alignment="CENTER" layoutY="59.0" prefHeight="50.0" prefWidth="900.0" text="...enjoy your freedom..." textFill="#a61b1b">
          <font>
-            <Font name="Arial Italic" size="14.0" />
+            <Font name="Luminari" size="20.0" />
          </font>
-      </Button>
+      </Label>
    </children>
 </AnchorPane>
