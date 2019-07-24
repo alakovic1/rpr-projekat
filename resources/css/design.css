@@ -1,0 +1,6 @@
+.yes {
+    -fx-control-inner-background: #64c288;
+}
+.no {
+    -fx-control-inner-background: #e76666;
+}

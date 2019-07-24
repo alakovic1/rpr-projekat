@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,6 +24,18 @@ public class LoginnRegisterController {
     public TextField email;
     public TextField password;
 
+    @FXML
+    public void initialize(){
+        usernameLogin.getStyleClass().add("no");
+        passwordLogin.getStyleClass().add("no");
+        firstName.getStyleClass().add("no");
+        lastName.getStyleClass().add("no");
+        username.getStyleClass().add("no");
+        adress.getStyleClass().add("no");
+        email.getStyleClass().add("no");
+        password.getStyleClass().add("no");
+    }
+
     public void onRegister(ActionEvent actionEvent) {
     }
 
@@ -41,6 +54,9 @@ public class LoginnRegisterController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else{
+
         }
     }
 }
