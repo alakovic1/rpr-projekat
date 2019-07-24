@@ -43,6 +43,9 @@ public class LoginnRegisterController {
         if(usernameLogin.getText().equals("admin") && passwordLogin.getText().equals("admin")){
             Parent root = null;
             try {
+                Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                stage.close();
+                StartController.stage.close();
                 Stage primaryStage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/employeeFile.fxml"));
                 root = loader.load();
