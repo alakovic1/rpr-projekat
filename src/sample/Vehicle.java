@@ -12,6 +12,14 @@ public class Vehicle {
     private int price;
 
     public Vehicle() {
+        name = "";
+        brand = "";
+        model = "";
+        nmbDoors = 0;
+        nmbSeats = 0;
+        engine = "";
+        available = 0;
+        price = 0;
     }
 
     public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, int available, int price) {

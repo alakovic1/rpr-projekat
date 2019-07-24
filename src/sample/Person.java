@@ -10,6 +10,12 @@ public class Person {
     private String password;
 
     public Person() {
+        firstName = "";
+        lastName = "";
+        username = "";
+        adress = "";
+        email = "";
+        password = "";
     }
 
     public Person(int id, String firstName, String lastName, String username, String adress, String email, String password) {

@@ -66,6 +66,19 @@ public class LoginnRegisterController {
         return false;
     }
 
+    private boolean doesExistClient(){
+        Person currentPerson = new Person();
+        for(Person p : listOfPersons){
+            if(usernameLogin.getText().equals(p.getUsername())){
+                currentPerson = p;
+                break;
+            }
+        }
+
+        if(!currentPerson.getFirstName().equals("")) return true;
+        return false;
+    }
+
     @FXML
     public void initialize(){
         usernameLoginIsValid = false;
@@ -140,30 +153,37 @@ public class LoginnRegisterController {
             }
         }
         else {
-            if (isCorrectPassword()) {
-                Parent root = null;
-                try {
-                    Stage stage = (Stage) usernameLogin.getScene().getWindow();
-                    stage.close();
-                    StartController.stage.close();
-                    Stage primaryStage = new Stage();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
-                    root = loader.load();
-                    primaryStage.setTitle("Client File");
-                    primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-                    primaryStage.initModality(Modality.APPLICATION_MODAL);
-                    primaryStage.setResizable(false);
-                    primaryStage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
+            if (!doesExistClient()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
-                alert.setHeaderText("Incorrect password");
-                alert.setContentText("Please enter your password correctly");
+                alert.setHeaderText("This client does not exist");
+                alert.setContentText("Please enter your username or password correctly, or register");
                 alert.show();
+            } else {
+                if (isCorrectPassword()) {
+                    Parent root = null;
+                    try {
+                        Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                        stage.close();
+                        StartController.stage.close();
+                        Stage primaryStage = new Stage();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                        root = loader.load();
+                        primaryStage.setTitle("Client File");
+                        primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                        primaryStage.initModality(Modality.APPLICATION_MODAL);
+                        primaryStage.setResizable(false);
+                        primaryStage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("Incorrect password");
+                    alert.setContentText("Please enter your password correctly");
+                    alert.show();
+                }
             }
         }
     }
