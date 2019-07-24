@@ -48,7 +48,7 @@ public class LoginnRegisterController {
         listOfPersons = FXCollections.observableArrayList(rentacarDAOdb.persons());
     }
 
-    private boolean validateFirstAndLastName(String n) {
+    private boolean validateText(String n) {
         if(n.length() != 0) return true;
         return false;
     }
@@ -99,10 +99,40 @@ public class LoginnRegisterController {
         email.getStyleClass().add("no");
         password.getStyleClass().add("no");
 
+        usernameLogin.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (validateText(n)) {
+                    usernameLogin.getStyleClass().removeAll("no");
+                    usernameLogin.getStyleClass().add("yes");
+                    usernameLoginIsValid = true;
+                } else {
+                    usernameLogin.getStyleClass().removeAll("yes");
+                    usernameLogin.getStyleClass().add("no");
+                    usernameLoginIsValid = false;
+                }
+            }
+        });
+
+        passwordLogin.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (validateText(n)) {
+                    passwordLogin.getStyleClass().removeAll("no");
+                    passwordLogin.getStyleClass().add("yes");
+                    passwordLoginIsValid = true;
+                } else {
+                    passwordLogin.getStyleClass().removeAll("yes");
+                    passwordLogin.getStyleClass().add("no");
+                    passwordLoginIsValid = false;
+                }
+            }
+        });
+
         firstName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (validateFirstAndLastName(n)) {
+                if (validateText(n)) {
                     firstName.getStyleClass().removeAll("no");
                     firstName.getStyleClass().add("yes");
                     firstNameIsValid = true;
@@ -117,7 +147,7 @@ public class LoginnRegisterController {
         lastName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (validateFirstAndLastName(n)) {
+                if (validateText(n)) {
                     lastName.getStyleClass().removeAll("no");
                     lastName.getStyleClass().add("yes");
                     lastNameIsValid = true;
@@ -134,57 +164,65 @@ public class LoginnRegisterController {
     }
 
     public void onLogin(ActionEvent actionEvent) {
-        if(usernameLogin.getText().equals("admin") && passwordLogin.getText().equals("admin")){
-            Parent root = null;
-            try {
-                Stage stage = (Stage) usernameLogin.getScene().getWindow();
-                stage.close();
-                StartController.stage.close();
-                Stage primaryStage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/employeeFile.fxml"));
-                root = loader.load();
-                primaryStage.setTitle("Employee File");
-                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-                primaryStage.initModality(Modality.APPLICATION_MODAL);
-                primaryStage.setResizable(false);
-                primaryStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            if (!doesExistClient()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setHeaderText("This client does not exist");
-                alert.setContentText("Please enter your username or password correctly, or register");
-                alert.show();
+        if(usernameLogin.getText().length() != 0 && passwordLogin.getText().length() != 0) {
+            if (usernameLogin.getText().equals("admin") && passwordLogin.getText().equals("admin")) {
+                Parent root = null;
+                try {
+                    Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                    stage.close();
+                    StartController.stage.close();
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/employeeFile.fxml"));
+                    root = loader.load();
+                    primaryStage.setTitle("Employee File");
+                    primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                    primaryStage.initModality(Modality.APPLICATION_MODAL);
+                    primaryStage.setResizable(false);
+                    primaryStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
-                if (isCorrectPassword()) {
-                    Parent root = null;
-                    try {
-                        Stage stage = (Stage) usernameLogin.getScene().getWindow();
-                        stage.close();
-                        StartController.stage.close();
-                        Stage primaryStage = new Stage();
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
-                        root = loader.load();
-                        primaryStage.setTitle("Client File");
-                        primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-                        primaryStage.initModality(Modality.APPLICATION_MODAL);
-                        primaryStage.setResizable(false);
-                        primaryStage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
+                if (!doesExistClient()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERROR");
-                    alert.setHeaderText("Incorrect password");
-                    alert.setContentText("Please enter your password correctly");
+                    alert.setHeaderText("This client does not exist");
+                    alert.setContentText("Please enter your username or password correctly, or register");
                     alert.show();
+                } else {
+                    if (isCorrectPassword()) {
+                        Parent root = null;
+                        try {
+                            Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                            stage.close();
+                            StartController.stage.close();
+                            Stage primaryStage = new Stage();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                            root = loader.load();
+                            primaryStage.setTitle("Client File");
+                            primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                            primaryStage.initModality(Modality.APPLICATION_MODAL);
+                            primaryStage.setResizable(false);
+                            primaryStage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("ERROR");
+                        alert.setHeaderText("Incorrect password");
+                        alert.setContentText("Please enter your password correctly");
+                        alert.show();
+                    }
                 }
             }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("You didn't fill all fields");
+            alert.setContentText("Please fill all fields");
+            alert.show();
         }
     }
 }
