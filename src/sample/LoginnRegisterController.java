@@ -124,7 +124,22 @@ public class LoginnRegisterController {
             }
         }
         else{
-
+            Parent root = null;
+            try {
+                Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                stage.close();
+                StartController.stage.close();
+                Stage primaryStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                root = loader.load();
+                primaryStage.setTitle("Client File");
+                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                primaryStage.setResizable(false);
+                primaryStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
