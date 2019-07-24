@@ -70,8 +70,6 @@ public class LoginnRegisterController {
         email.getStyleClass().add("no");
         password.getStyleClass().add("no");
 
-        usernameLogin.setText(listOfPersons.get(0).getUsername());
-
         firstName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
