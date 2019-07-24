@@ -2,6 +2,8 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +37,14 @@ public class LoginnRegisterController {
     private boolean emailIsValid = false;
     private boolean passwordIsValid = false;
 
+    private RentACarDAODatabase rentacarDAOdb;
+    private ObservableList<Person> listOfPersons;
+
+    public LoginnRegisterController() {
+        rentacarDAOdb = RentACarDAODatabase.getInstance();
+        listOfPersons = FXCollections.observableArrayList(rentacarDAOdb.persons());
+    }
+
     private boolean validateFirstAndLastName(String n) {
         if(n.length() != 0) return true;
         return false;
@@ -59,6 +69,8 @@ public class LoginnRegisterController {
         adress.getStyleClass().add("no");
         email.getStyleClass().add("no");
         password.getStyleClass().add("no");
+
+        usernameLogin.setText(listOfPersons.get(0).getUsername());
 
         firstName.textProperty().addListener(new ChangeListener<String>() {
             @Override

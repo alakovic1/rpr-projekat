@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="ojdbc8" level="project" />
+    <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.25.2" level="project" />
+    <orderEntry type="library" name="org.testfx:testfx-junit5:4.0.15-alpha" level="project" />
   </component>
 </module>
