@@ -9,11 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -47,6 +50,19 @@ public class LoginnRegisterController {
 
     private boolean validateFirstAndLastName(String n) {
         if(n.length() != 0) return true;
+        return false;
+    }
+
+    private boolean isCorrectPassword(){
+        Person currentPerson = new Person();
+        for(Person p : listOfPersons){
+            if(usernameLogin.getText().equals(p.getUsername())){
+                currentPerson = p;
+                break;
+            }
+        }
+
+        if(currentPerson.getPassword().equals(passwordLogin.getText())) return true;
         return false;
     }
 
@@ -123,22 +139,31 @@ public class LoginnRegisterController {
                 e.printStackTrace();
             }
         }
-        else{
-            Parent root = null;
-            try {
-                Stage stage = (Stage) usernameLogin.getScene().getWindow();
-                stage.close();
-                StartController.stage.close();
-                Stage primaryStage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
-                root = loader.load();
-                primaryStage.setTitle("Client File");
-                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-                primaryStage.initModality(Modality.APPLICATION_MODAL);
-                primaryStage.setResizable(false);
-                primaryStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+        else {
+            if (isCorrectPassword()) {
+                Parent root = null;
+                try {
+                    Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                    stage.close();
+                    StartController.stage.close();
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                    root = loader.load();
+                    primaryStage.setTitle("Client File");
+                    primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                    primaryStage.initModality(Modality.APPLICATION_MODAL);
+                    primaryStage.setResizable(false);
+                    primaryStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Incorrect password");
+                alert.setContentText("Please enter your password correctly");
+                alert.show();
             }
         }
     }
