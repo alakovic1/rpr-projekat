@@ -163,6 +163,25 @@ public class LoginnRegisterController {
     public void onRegister(ActionEvent actionEvent) {
         Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
         rentacarDAOdb.addPerson(newPerson);
+
+        //todo pregledati da li radi u isto vrijeme registracija pa poslije login bez ponovnog runa...
+
+        Parent root = null;
+        try {
+            Stage stage = (Stage) usernameLogin.getScene().getWindow();
+            stage.close();
+            StartController.stage.close();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+            root = loader.load();
+            primaryStage.setTitle("Client File");
+            primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onLogin(ActionEvent actionEvent) {
