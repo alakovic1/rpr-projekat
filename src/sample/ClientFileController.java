@@ -2,9 +2,11 @@ package sample;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,6 +25,7 @@ public class ClientFileController implements Initializable {
     public TableColumn<Vehicle, String> columnEngine;
     public TableColumn<Vehicle, String> columnAvailable;
     public TableColumn<Vehicle, String> columnPrice;
+    public ComboBox<String> boxFilter;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -33,6 +36,7 @@ public class ClientFileController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        boxFilter.getSelectionModel().selectFirst();
         tableofVehiclesClient.setItems(listOfVehicles);
 
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
