@@ -79,6 +79,16 @@ public class LoginnRegisterController {
         return false;
     }
 
+    private boolean isValidForm(){
+        if(firstName.getText().length() != 0 && lastName.getText().length() != 0 && username.getText().length() != 0 && adress.getText().length() != 0 && email.getText().length() != 0 && password.getText().length() != 0 && emailIsValid) return true;
+        return false;
+    }
+
+    private boolean isValidEmail(String n) {
+        for (int i = 0; i < n.length(); i++) if (n.charAt(i) == '@') return true;
+        return false;
+    }
+
     @FXML
     public void initialize(){
         usernameLoginIsValid = false;
@@ -158,29 +168,98 @@ public class LoginnRegisterController {
                 }
             }
         });
+
+        username.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (validateText(n)) {
+                    username.getStyleClass().removeAll("no");
+                    username.getStyleClass().add("yes");
+                    usernameIsValid = true;
+                } else {
+                    username.getStyleClass().removeAll("yes");
+                    username.getStyleClass().add("no");
+                    usernameIsValid = false;
+                }
+            }
+        });
+
+        adress.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (validateText(n)) {
+                    adress.getStyleClass().removeAll("no");
+                    adress.getStyleClass().add("yes");
+                    adressIsValid = true;
+                } else {
+                    adress.getStyleClass().removeAll("yes");
+                    adress.getStyleClass().add("no");
+                    adressIsValid = false;
+                }
+            }
+        });
+
+        email.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (isValidEmail(n)) {
+                    email.getStyleClass().removeAll("no");
+                    email.getStyleClass().add("yes");
+                    emailIsValid = true;
+                } else {
+                    email.getStyleClass().removeAll("yes");
+                    email.getStyleClass().add("no");
+                    emailIsValid = false;
+                }
+            }
+        });
+
+        password.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (validateText(n)) {
+                    password.getStyleClass().removeAll("no");
+                    password.getStyleClass().add("yes");
+                    passwordIsValid = true;
+                } else {
+                    password.getStyleClass().removeAll("yes");
+                    password.getStyleClass().add("no");
+                    passwordIsValid = false;
+                }
+            }
+        });
     }
 
     public void onRegister(ActionEvent actionEvent) {
-        Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
-        rentacarDAOdb.addPerson(newPerson);
+        if (isValidForm()) {
+            Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
+            rentacarDAOdb.addPerson(newPerson);
 
-        //todo pregledati da li radi u isto vrijeme registracija pa poslije login bez ponovnog runa...
+            //todo pregledati da li radi u isto vrijeme registracija pa poslije login bez ponovnog runa...
 
-        Parent root = null;
-        try {
-            Stage stage = (Stage) usernameLogin.getScene().getWindow();
-            stage.close();
-            StartController.stage.close();
-            Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
-            root = loader.load();
-            primaryStage.setTitle("Client File");
-            primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            primaryStage.initModality(Modality.APPLICATION_MODAL);
-            primaryStage.setResizable(false);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Parent root = null;
+            try {
+                Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                stage.close();
+                StartController.stage.close();
+                Stage primaryStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                root = loader.load();
+                primaryStage.setTitle("Client File");
+                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                primaryStage.setResizable(false);
+                primaryStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("You didn't fill all fields");
+            alert.setContentText("Please fill all red fields correctly");
+            alert.show();
         }
     }
 
@@ -242,7 +321,7 @@ public class LoginnRegisterController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("You didn't fill all fields");
-            alert.setContentText("Please fill all fields");
+            alert.setContentText("Please fill all red fields");
             alert.show();
         }
     }
