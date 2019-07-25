@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -42,6 +42,8 @@ public class RentACarDAODatabase {
 
         try {
             getPersonsUpit = connection.prepareStatement("SELECT * FROM person");
+            addPersonUpit = connection.prepareStatement("INSERT INTO person VALUES(?,?,?,?,?,?,?)");
+            newPersonID = connection.prepareStatement("SELECT MAX(id)+1 FROM person");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,5 +84,25 @@ public class RentACarDAODatabase {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public void addPerson(Person person){
+        try {
+            ResultSet rs = newPersonID.executeQuery();
+            int id = 1;
+            if(rs.next()) id = rs.getInt(1);
+
+            addPersonUpit.setInt(1,id);
+            addPersonUpit.setString(2,person.getFirstName());
+            addPersonUpit.setString(3,person.getLastName());
+            addPersonUpit.setString(4,person.getUsername());
+            addPersonUpit.setString(5,person.getAdress());
+            addPersonUpit.setString(6,person.getEmail());
+            addPersonUpit.setString(7,person.getPassword());
+
+            addPersonUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

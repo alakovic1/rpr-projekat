@@ -161,6 +161,8 @@ public class LoginnRegisterController {
     }
 
     public void onRegister(ActionEvent actionEvent) {
+        Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
+        rentacarDAOdb.addPerson(newPerson);
     }
 
     public void onLogin(ActionEvent actionEvent) {
