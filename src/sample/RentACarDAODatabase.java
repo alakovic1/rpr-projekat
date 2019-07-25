@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -44,6 +44,7 @@ public class RentACarDAODatabase {
             getPersonsUpit = connection.prepareStatement("SELECT * FROM person");
             addPersonUpit = connection.prepareStatement("INSERT INTO person VALUES(?,?,?,?,?,?,?)");
             newPersonID = connection.prepareStatement("SELECT MAX(id)+1 FROM person");
+            getVehiclesUpit = connection.prepareStatement("SELECT * FROM vehicle");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,6 +80,20 @@ public class RentACarDAODatabase {
             while (rs.next()) {
                 Person person = new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7));
                 result.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<Vehicle> vehicles() {
+        ArrayList<Vehicle> result = new ArrayList();
+        try {
+            ResultSet rs = getVehiclesUpit.executeQuery();
+            while (rs.next()) {
+                Vehicle v = new Vehicle(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getInt(5),rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getInt(9));
+                result.add(v);
             }
         } catch (SQLException e) {
             e.printStackTrace();

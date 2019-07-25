@@ -21,6 +21,7 @@ public class Vehicle {
         engine = "";
         available = 0;
         price = 0;
+        person = new Person();
     }
 
     public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, int available, int price) {
