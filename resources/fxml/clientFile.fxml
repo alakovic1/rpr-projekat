@@ -5,7 +5,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClientFileController">
+<?import java.net.URL?>
+<AnchorPane fx:id="back" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClientFileController">
+    <stylesheets>
+        <URL value="@/css/start.css" />
+    </stylesheets>
    <children>
       <TableView fx:id="tableofVehiclesClient" layoutX="14.0" layoutY="88.0" prefHeight="225.0" prefWidth="567.0">
         <columns>

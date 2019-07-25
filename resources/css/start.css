@@ -4,3 +4,10 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position:center;
 }
+
+#back {
+    -fx-background-image: url("/img/back.jpg");
+    -fx-background-size: 600 400;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
