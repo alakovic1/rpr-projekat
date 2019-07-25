@@ -25,7 +25,7 @@ public class ClientFileController implements Initializable {
     public TableColumn<Vehicle, String> columnEngine;
     public TableColumn<Vehicle, String> columnAvailable;
     public TableColumn<Vehicle, String> columnPrice;
-    public ComboBox<String> boxFilter;
+    public ComboBox boxFilter;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -36,7 +36,7 @@ public class ClientFileController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        boxFilter.getSelectionModel().selectFirst();
+        boxFilter.getSelectionModel().selectFirst(); //todo uraditi za promjenu... filtriranje
         tableofVehiclesClient.setItems(listOfVehicles);
 
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
