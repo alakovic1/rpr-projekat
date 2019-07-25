@@ -89,6 +89,19 @@ public class LoginnRegisterController {
         return false;
     }
 
+    private boolean usernameDoesExist(){
+        Person currentPerson = new Person();
+        for(Person p : listOfPersons){
+            if(username.getText().equals(p.getUsername())){
+                currentPerson = p;
+                break;
+            }
+        }
+
+        if(currentPerson.getFirstName().equals("")) return true;
+        return false;
+    }
+
     @FXML
     public void initialize(){
         usernameLoginIsValid = false;
@@ -232,26 +245,35 @@ public class LoginnRegisterController {
 
     public void onRegister(ActionEvent actionEvent) {
         if (isValidForm()) {
-            Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
-            rentacarDAOdb.addPerson(newPerson);
+            if (usernameDoesExist()) {
+                Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
+                rentacarDAOdb.addPerson(newPerson);
 
-            //todo pregledati da li radi u isto vrijeme registracija pa poslije login bez ponovnog runa...
+                //todo pregledati da li radi u isto vrijeme registracija pa poslije login bez ponovnog runa...
 
-            Parent root = null;
-            try {
-                Stage stage = (Stage) usernameLogin.getScene().getWindow();
-                stage.close();
-                StartController.stage.close();
-                Stage primaryStage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
-                root = loader.load();
-                primaryStage.setTitle("Client File");
-                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-                primaryStage.initModality(Modality.APPLICATION_MODAL);
-                primaryStage.setResizable(false);
-                primaryStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+                Parent root = null;
+                try {
+                    Stage stage = (Stage) usernameLogin.getScene().getWindow();
+                    stage.close();
+                    StartController.stage.close();
+                    Stage primaryStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                    root = loader.load();
+                    primaryStage.setTitle("Client File");
+                    primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                    primaryStage.initModality(Modality.APPLICATION_MODAL);
+                    primaryStage.setResizable(false);
+                    primaryStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("That username is alredy used by another user");
+                alert.setContentText("Please enter a new username");
+                alert.show();
             }
         }
         else{
