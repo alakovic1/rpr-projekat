@@ -8,7 +8,7 @@ public class Vehicle {
     private int nmbDoors;
     private int nmbSeats;
     private String engine;
-    private int available;
+    private String available;
     private int price;
     private Person person;
 
@@ -19,12 +19,12 @@ public class Vehicle {
         nmbDoors = 0;
         nmbSeats = 0;
         engine = "";
-        available = 0;
+        available = "";
         price = 0;
         person = new Person();
     }
 
-    public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, int available, int price) {
+    public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, String available, int price) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -36,7 +36,7 @@ public class Vehicle {
         this.price = price;
     }
 
-    public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, int available, int price, Person person) {
+    public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, String available, int price, Person person) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -113,11 +113,11 @@ public class Vehicle {
         this.engine = engine;
     }
 
-    public int getAvailable() {
+    public String getAvailable() {
         return available;
     }
 
-    public void setAvailable(int available) {
+    public void setAvailable(String available) {
         this.available = available;
     }
 

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
 <AnchorPane fx:id="back" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClientFileController">
     <stylesheets>
         <URL value="@/css/start.css" />
     </stylesheets>
    <children>
-      <TableView fx:id="tableofVehiclesClient" layoutX="14.0" layoutY="88.0" prefHeight="225.0" prefWidth="567.0">
+      <TableView fx:id="tableofVehiclesClient" layoutX="16.0" layoutY="133.0" prefHeight="225.0" prefWidth="569.0">
         <columns>
           <TableColumn fx:id="columnName" prefWidth="69.0" text="Name" />
           <TableColumn fx:id="columnBrand" prefWidth="69.0" text="Brand" />
@@ -20,9 +21,12 @@
             <TableColumn fx:id="columnSeats" prefWidth="65.0" text="Seat nmb" />
             <TableColumn fx:id="columnEngine" prefWidth="79.0" text="Engine" />
             <TableColumn fx:id="columnAvailable" prefWidth="69.0" text="Available" />
-            <TableColumn fx:id="columnPrice" prefWidth="72.0" text="Price" />
+            <TableColumn fx:id="columnPrice" prefWidth="74.0" text="Price" />
         </columns>
       </TableView>
-      <Label alignment="CENTER" layoutX="161.0" layoutY="14.0" prefHeight="33.0" prefWidth="278.0" text="Here are all our cars that you can rent" />
+      <Label alignment="CENTER" layoutX="144.0" layoutY="26.0" prefHeight="33.0" prefWidth="326.0" text="Here are all our cars that you can rent">
+         <font>
+            <Font name="Rockwell" size="15.0" />
+         </font></Label>
    </children>
 </AnchorPane>
