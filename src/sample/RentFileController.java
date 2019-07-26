@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RentFileController implements Initializable {
@@ -95,7 +96,15 @@ public class RentFileController implements Initializable {
 
     public void onFinish(ActionEvent actionEvent) {
         if(isFormValid()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm");
+            alert.setHeaderText("Are you sure you want to rent this car?");
+            alert.setContentText("OK for yes!");
 
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                //todo uraditi potvrdu sa ispisom cijene
+            }
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
