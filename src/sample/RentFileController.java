@@ -35,13 +35,15 @@ public class RentFileController implements Initializable {
         this.person = person;
     }
 
-    private boolean isValidDate(String n){
-        if(n.length() == 0) return false;
+    private boolean isValidDate(String n) {
+        if (n.length() == 0) return false;
         return true;
     }
 
-    private boolean isFormValid(){
-        return (pickupDateValidate || returnDateValidate);
+    private boolean isFormValid() {
+        if (!nowCheckBox.isSelected() && !shopCheckBox.isSelected()) return false;
+        if (!pickupDateValidate || !returnDateValidate) return false;
+        return true;
     }
 
     @Override
@@ -95,22 +97,21 @@ public class RentFileController implements Initializable {
     }
 
     public void onFinish(ActionEvent actionEvent) {
-        if(isFormValid()){
+        if (isFormValid()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm");
             alert.setHeaderText("Are you sure you want to rent this car?");
             alert.setContentText("OK for yes!");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
+            if (result.get() == ButtonType.OK) {
                 //todo uraditi potvrdu sa ispisom cijene
             }
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("You didn't fill all fields");
-            alert.setContentText("Please fill all red fields");
+            alert.setContentText("Please fill all red fields or check the payment if you didn't...");
             alert.show();
         }
     }
