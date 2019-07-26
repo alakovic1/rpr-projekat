@@ -89,4 +89,7 @@ public class ClientFileController implements Initializable {
             columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));*/
         }
     }
+
+    public void onInfoBtn(ActionEvent actionEvent) {
+    }
 }
