@@ -6,9 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import java.net.URL?>
+<AnchorPane fx:id="back2" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.RentFileController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="487.0" prefWidth="836.0">
+    <stylesheets>
+        <URL value="@/css/start.css" />
+    </stylesheets>
 
 </AnchorPane>
