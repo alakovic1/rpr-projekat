@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import java.net.URL?>
-<AnchorPane fx:id="back2" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.RentFileController"
-            prefHeight="487.0" prefWidth="836.0">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="back3" prefHeight="581.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/start.css" />
     </stylesheets>
+   <children>
+      <Label alignment="CENTER" layoutX="16.0" layoutY="42.0" prefHeight="57.0" prefWidth="249.0" text="You have chosen this car">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="vehicleInfoField" editable="false" layoutX="275.0" layoutY="52.0" prefHeight="34.0" prefWidth="198.0" />
+   </children>
 
 </AnchorPane>

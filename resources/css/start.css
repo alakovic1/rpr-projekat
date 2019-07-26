@@ -19,6 +19,13 @@
     -fx-background-position:center;
 }
 
+#back3 {
+    -fx-background-image: url("/img/back.jpg");
+    -fx-background-size: 502 581;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
 #infoBtn {
     -fx-background-image: url("/img/moreInfo.png");
     -fx-background-size: 80 70;

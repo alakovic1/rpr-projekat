@@ -126,6 +126,8 @@ public class ClientFileController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
+            RentFileController controller = new RentFileController(vehicle);
+            loader.setController(controller);
             root = loader.load();
             primaryStage.setTitle("Rent");
             primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
