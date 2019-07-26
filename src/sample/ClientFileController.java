@@ -100,9 +100,39 @@ public class ClientFileController implements Initializable {
     }
 
     public void onInfoBtn(ActionEvent actionEvent) {
+        Vehicle vehicle = tableofVehiclesClient.getSelectionModel().getSelectedItem();
+        if(vehicle == null) return;
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/moreInfoFile.fxml"));
+            root = loader.load();
+            primaryStage.setTitle("More information");
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onRentBtn(ActionEvent actionEvent) {
+        Vehicle vehicle = tableofVehiclesClient.getSelectionModel().getSelectedItem();
+        if(vehicle == null) return;
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
+            root = loader.load();
+            primaryStage.setTitle("Rent");
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onLogOut(ActionEvent actionEvent) {
