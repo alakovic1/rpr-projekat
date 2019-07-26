@@ -12,6 +12,7 @@
 <AnchorPane fx:id="back3" prefHeight="581.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/start.css" />
+        <URL value="@/css/design.css" />
     </stylesheets>
    <children>
       <Label alignment="CENTER" layoutX="16.0" layoutY="42.0" prefHeight="57.0" prefWidth="249.0" text="You have chosen this car">

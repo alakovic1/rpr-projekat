@@ -1,11 +1,10 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,6 +23,9 @@ public class RentFileController implements Initializable {
     public Button finishBtn;
     public Button closeBtn;
 
+    public boolean pickupDateValidate = false;
+    public boolean returnDateValidate = false;
+
     public RentFileController() {
     }
 
@@ -32,11 +34,58 @@ public class RentFileController implements Initializable {
         this.person = person;
     }
 
+    private boolean isValidDate(String n){
+        if(n.length() == 0) return false;
+        return true;
+    }
+
+    private boolean isFormValid(){
+        return (pickupDateValidate || returnDateValidate);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vehicleInfoField.setText(vehicle.getName() + " (" + vehicle.getEngine() + ")");
         firstAndLastNameField.setText(person.getFirstName() + " " + person.getLastName());
         emailField.setText(person.getEmail());
+
+        pickupDate.getStyleClass().add("no");
+        returnDate.getStyleClass().add("no");
+        firstAndLastNameField.getStyleClass().add("yes");
+        emailField.getStyleClass().add("yes");
+
+        pickupDateValidate = false;
+        returnDateValidate = false;
+
+        pickupDate.getEditor().textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String n) {
+                if (isValidDate(n)) {
+                    pickupDate.getStyleClass().removeAll("no");
+                    pickupDate.getStyleClass().add("yes");
+                    pickupDateValidate = true;
+                } else {
+                    pickupDate.getStyleClass().removeAll("yes");
+                    pickupDate.getStyleClass().add("no");
+                    pickupDateValidate = false;
+                }
+            }
+        });
+
+        returnDate.getEditor().textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String n) {
+                if (isValidDate(n)) {
+                    returnDate.getStyleClass().removeAll("no");
+                    returnDate.getStyleClass().add("yes");
+                    returnDateValidate = true;
+                } else {
+                    returnDate.getStyleClass().removeAll("yes");
+                    returnDate.getStyleClass().add("no");
+                    returnDateValidate = false;
+                }
+            }
+        });
     }
 
     public void onClose(ActionEvent actionEvent) {
@@ -45,5 +94,15 @@ public class RentFileController implements Initializable {
     }
 
     public void onFinish(ActionEvent actionEvent) {
+        if(isFormValid()){
+
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("You didn't fill all fields");
+            alert.setContentText("Please fill all red fields");
+            alert.show();
+        }
     }
 }
