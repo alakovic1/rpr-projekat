@@ -75,6 +75,8 @@ public class MoreInfoFileController implements Initializable {
     public void onRentThisCar(ActionEvent actionEvent) {
         Parent root = null;
         try {
+            Stage stage = (Stage) nameField.getScene().getWindow();
+            stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
             root = loader.load();
