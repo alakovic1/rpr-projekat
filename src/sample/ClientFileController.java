@@ -6,18 +6,24 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
+
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class ClientFileController implements Initializable {
     public TableView<Vehicle> tableofVehiclesClient;
@@ -30,6 +36,9 @@ public class ClientFileController implements Initializable {
     public TableColumn<Vehicle, String> columnAvailable;
     public TableColumn<Vehicle, String> columnPrice;
     public ComboBox boxFilter;
+    public Button infoBtn;
+    public Button rentBtn;
+    public Button logoutBtn;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -94,5 +103,22 @@ public class ClientFileController implements Initializable {
     }
 
     public void onRentBtn(ActionEvent actionEvent) {
+    }
+
+    public void onLogOut(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            Stage stage = (Stage) logoutBtn.getScene().getWindow();
+            stage.close();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/start.fxml"));
+            root = loader.load();
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
