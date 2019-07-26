@@ -106,6 +106,8 @@ public class ClientFileController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/moreInfoFile.fxml"));
+            MoreInfoFileController controller = new MoreInfoFileController(vehicle);
+            loader.setController(controller);
             root = loader.load();
             primaryStage.setTitle("More information");
             primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
