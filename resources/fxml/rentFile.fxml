@@ -17,6 +17,11 @@
          </font>
       </Label>
       <TextField fx:id="vehicleInfoField" editable="false" layoutX="275.0" layoutY="52.0" prefHeight="34.0" prefWidth="198.0" />
+      <Label alignment="CENTER" layoutX="119.0" layoutY="115.0" prefHeight="34.0" prefWidth="249.0" text="Please enter your information">
+         <font>
+            <Font name="Avenir Next Condensed Bold" size="19.0" />
+         </font>
+      </Label>
    </children>
 
 </AnchorPane>

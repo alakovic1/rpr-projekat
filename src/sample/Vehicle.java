@@ -10,7 +10,6 @@ public class Vehicle {
     private String engine;
     private String available;
     private int price;
-    private Person person;
 
     public Vehicle() {
         name = "";
@@ -21,7 +20,6 @@ public class Vehicle {
         engine = "";
         available = "";
         price = 0;
-        person = new Person();
     }
 
     public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, String available, int price) {
@@ -34,27 +32,6 @@ public class Vehicle {
         this.engine = engine;
         this.available = available;
         this.price = price;
-    }
-
-    public Vehicle(int id, String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, String available, int price, Person person) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.model = model;
-        this.nmbDoors = nmbDoors;
-        this.nmbSeats = nmbSeats;
-        this.engine = engine;
-        this.available = available;
-        this.price = price;
-        this.person = person;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 
     public int getId() {
