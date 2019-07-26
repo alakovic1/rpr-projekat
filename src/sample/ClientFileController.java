@@ -122,20 +122,29 @@ public class ClientFileController implements Initializable {
     public void onRentBtn(ActionEvent actionEvent) {
         Vehicle vehicle = tableofVehiclesClient.getSelectionModel().getSelectedItem();
         if(vehicle == null) return;
-        Parent root = null;
-        try {
-            Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
-            RentFileController controller = new RentFileController(vehicle);
-            loader.setController(controller);
-            root = loader.load();
-            primaryStage.setTitle("Rent");
-            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
-            primaryStage.initModality(Modality.APPLICATION_MODAL);
-            primaryStage.setResizable(false);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(vehicle.getAvailable().equals("yes")) {
+            Parent root = null;
+            try {
+                Stage primaryStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
+                RentFileController controller = new RentFileController(vehicle);
+                loader.setController(controller);
+                root = loader.load();
+                primaryStage.setTitle("Rent");
+                primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                primaryStage.setResizable(false);
+                primaryStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("We are sorry...");
+            alert.setContentText("This car isn't available for rent now");
+            alert.show();
         }
     }
 
