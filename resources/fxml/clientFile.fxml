@@ -40,7 +40,7 @@
       <ComboBox fx:id="boxFilter" layoutX="115.0" layoutY="93.0" onAction="#onComboChange" prefWidth="150.0">
           <items>
               <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="All" />
+                  <String fx:value="Nothing" />
                   <String fx:value="Name" />
                   <String fx:value="Brand" />
                   <String fx:value="Available" />
