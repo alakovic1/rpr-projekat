@@ -2,6 +2,8 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,6 +26,46 @@
          </font>
       </Label>
       <Button fx:id="closeBtn" alignment="CENTER" layoutX="408.0" layoutY="533.0" mnemonicParsing="false" onAction="#onClose" prefHeight="34.0" prefWidth="80.0" text="Close" />
+      <DatePicker fx:id="pickupDate" layoutX="205.0" layoutY="177.0" />
+      <Label alignment="CENTER" layoutX="73.0" layoutY="177.0" prefHeight="27.0" prefWidth="108.0" text="Pickup date">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="68.0" layoutY="227.0" prefHeight="34.0" prefWidth="118.0" text="Return date">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="returnDate" layoutX="205.0" layoutY="231.0" />
+      <CheckBox fx:id="nowCheckBox" layoutX="265.0" layoutY="292.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="108.0" text="Now">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="shopCheckBox" layoutX="265.0" layoutY="328.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="118.0" text="In the shop">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <Label alignment="CENTER" layoutX="144.0" layoutY="302.0" prefHeight="27.0" prefWidth="74.0" text="Paying">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="73.0" layoutY="394.0" prefHeight="34.0" prefWidth="164.0" text="First and Last name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstAndLastNameField" editable="false" layoutX="248.0" layoutY="398.0" prefHeight="27.0" prefWidth="220.0" />
+      <Label alignment="CENTER" layoutX="127.0" layoutY="446.0" prefHeight="27.0" prefWidth="74.0" text="Email" />
+      <TextField fx:id="emailField" editable="false" layoutX="248.0" layoutY="446.0" prefHeight="27.0" prefWidth="220.0" />
+      <Button fx:id="finishBtn" layoutX="185.0" layoutY="501.0" mnemonicParsing="false" onAction="#onFinish" prefHeight="49.0" prefWidth="126.0" text="Finish">
+         <font>
+            <Font name="Georgia" size="17.0" />
+         </font>
+      </Button>
    </children>
 
 </AnchorPane>

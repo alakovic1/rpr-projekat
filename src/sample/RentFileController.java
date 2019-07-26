@@ -2,6 +2,9 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -11,6 +14,14 @@ import java.util.ResourceBundle;
 public class RentFileController implements Initializable {
     public Vehicle vehicle;
     public TextField vehicleInfoField;
+    public DatePicker pickupDate;
+    public DatePicker returnDate;
+    public CheckBox nowCheckBox;
+    public CheckBox shopCheckBox;
+    public TextField firstAndLastNameField;
+    public TextField emailField;
+    public Button finishBtn;
+    public Button closeBtn;
 
     public RentFileController() {
     }
@@ -27,5 +38,8 @@ public class RentFileController implements Initializable {
     public void onClose(ActionEvent actionEvent) {
         Stage stage = (Stage) vehicleInfoField.getScene().getWindow();
         stage.close();
+    }
+
+    public void onFinish(ActionEvent actionEvent) {
     }
 }
