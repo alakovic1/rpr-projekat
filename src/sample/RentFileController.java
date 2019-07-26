@@ -1,6 +1,5 @@
 package sample;
 
-
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
