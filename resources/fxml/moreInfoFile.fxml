@@ -44,12 +44,12 @@
          </font>
       </Label>
       <TextField fx:id="mainPriceField" editable="false" layoutX="572.0" layoutY="96.0" prefHeight="27.0" prefWidth="129.0" />
-      <Label alignment="CENTER" layoutX="428.0" layoutY="145.0" prefHeight="29.0" prefWidth="188.0" text="Price 1 (1-3 days)">
+      <Label alignment="CENTER" layoutX="428.0" layoutY="145.0" prefHeight="29.0" prefWidth="188.0" text="Price 1 (1 - 3 days)">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="419.0" layoutY="182.0" prefHeight="41.0" prefWidth="198.0" text="Price 2 (3-15 days)">
+      <Label alignment="CENTER" layoutX="419.0" layoutY="182.0" prefHeight="41.0" prefWidth="198.0" text="Price 2 (3 - 15 days)">
          <font>
             <Font size="19.0" />
          </font>
