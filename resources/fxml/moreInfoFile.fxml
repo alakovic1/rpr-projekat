@@ -87,7 +87,13 @@
          </font>
       </Label>
       <TextField fx:id="availableField" editable="false" layoutX="225.0" layoutY="394.0" prefHeight="27.0" prefWidth="111.0" />
-      <Button fx:id="rentCarBtn" layoutX="672.0" layoutY="334.0" mnemonicParsing="false" onAction="#onRentThisCar" prefHeight="87.0" prefWidth="126.0" text="Rent this car" />
-      <Button fx:id="cancelBtn" layoutX="544.0" layoutY="375.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="38.0" prefWidth="95.0" text="Cancel" />
+      <Button fx:id="rentCarBtn" layoutX="657.0" layoutY="334.0" mnemonicParsing="false" onAction="#onRentThisCar" prefHeight="87.0" prefWidth="141.0" text="Rent this car">
+         <font>
+            <Font name="Cambria Bold" size="19.0" />
+         </font></Button>
+      <Button fx:id="cancelBtn" layoutX="544.0" layoutY="375.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="46.0" prefWidth="95.0" text="Cancel">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>
