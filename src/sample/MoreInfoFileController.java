@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class MoreInfoFileController implements Initializable {
     public Vehicle vehicle;
+    public Person person;
     public TextField nameField;
     public TextField brandField;
     public TextField modelField;
@@ -34,8 +35,9 @@ public class MoreInfoFileController implements Initializable {
     public MoreInfoFileController() {
     }
 
-    public MoreInfoFileController(Vehicle vehicle) {
+    public MoreInfoFileController(Vehicle vehicle, Person person) {
         this.vehicle = vehicle;
+        this.person = person;
     }
 
     @Override
@@ -79,7 +81,7 @@ public class MoreInfoFileController implements Initializable {
             stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
-            RentFileController controller = new RentFileController(vehicle);
+            RentFileController controller = new RentFileController(vehicle, person);
             loader.setController(controller);
             root = loader.load();
             primaryStage.setTitle("Rent");

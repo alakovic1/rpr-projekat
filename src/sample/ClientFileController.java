@@ -115,7 +115,7 @@ public class ClientFileController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/moreInfoFile.fxml"));
-            MoreInfoFileController controller = new MoreInfoFileController(vehicle);
+            MoreInfoFileController controller = new MoreInfoFileController(vehicle, person);
             loader.setController(controller);
             root = loader.load();
             primaryStage.setTitle("More information");
@@ -136,7 +136,7 @@ public class ClientFileController implements Initializable {
             try {
                 Stage primaryStage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
-                RentFileController controller = new RentFileController(vehicle);
+                RentFileController controller = new RentFileController(vehicle, person);
                 loader.setController(controller);
                 root = loader.load();
                 primaryStage.setTitle("Rent");

@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 public class RentFileController implements Initializable {
     public Vehicle vehicle;
+    public Person person;
     public TextField vehicleInfoField;
     public DatePicker pickupDate;
     public DatePicker returnDate;
@@ -26,13 +27,16 @@ public class RentFileController implements Initializable {
     public RentFileController() {
     }
 
-    public RentFileController(Vehicle vehicle) {
+    public RentFileController(Vehicle vehicle, Person person) {
         this.vehicle = vehicle;
+        this.person = person;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vehicleInfoField.setText(vehicle.getName() + " (" + vehicle.getEngine() + ")");
+        firstAndLastNameField.setText(person.getFirstName() + " " + person.getLastName());
+        emailField.setText(person.getEmail());
     }
 
     public void onClose(ActionEvent actionEvent) {
