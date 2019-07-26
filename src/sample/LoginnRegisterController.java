@@ -22,6 +22,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 
 public class LoginnRegisterController {
+    public Person person;
     public TextField usernameLogin;
     public TextField passwordLogin;
     public TextField firstName;
@@ -258,6 +259,8 @@ public class LoginnRegisterController {
                     StartController.stage.close();
                     Stage primaryStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                    ClientFileController controller = new ClientFileController(newPerson);
+                    loader.setController(controller);
                     root = loader.load();
                     primaryStage.setTitle("Client File");
                     primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
@@ -313,6 +316,13 @@ public class LoginnRegisterController {
                     alert.show();
                 } else {
                     if (isCorrectPassword()) {
+                        Person currentPerson = new Person();
+                        for(Person p : listOfPersons){
+                            if(usernameLogin.getText().equals(p.getUsername())){
+                                currentPerson = p;
+                                break;
+                            }
+                        }
                         Parent root = null;
                         try {
                             Stage stage = (Stage) usernameLogin.getScene().getWindow();
@@ -320,6 +330,8 @@ public class LoginnRegisterController {
                             StartController.stage.close();
                             Stage primaryStage = new Stage();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                            ClientFileController controller = new ClientFileController(currentPerson);
+                            loader.setController(controller);
                             root = loader.load();
                             primaryStage.setTitle("Client File");
                             primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));

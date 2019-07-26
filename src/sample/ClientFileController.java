@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class ClientFileController implements Initializable {
+    public Person person;
     public TableView<Vehicle> tableofVehiclesClient;
     public TableColumn<Vehicle, String> columnName;
     public TableColumn<Vehicle, String> columnBrand;
@@ -39,16 +40,24 @@ public class ClientFileController implements Initializable {
     public Button infoBtn;
     public Button rentBtn;
     public Button logoutBtn;
+    public TextField usernameClientField;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
 
-    public ClientFileController() {
+    /*public ClientFileController() {
+        rentacarDAOdb = RentACarDAODatabase.getInstance();
+        listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+    }*/
+
+    public ClientFileController(Person person) {
+        this.person = person;
         rentacarDAOdb = RentACarDAODatabase.getInstance();
         listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        usernameClientField.setText(person.getUsername());
         boxFilter.getSelectionModel().selectFirst(); //todo uraditi za promjenu... filtriranje
         tableofVehiclesClient.setItems(listOfVehicles);
 
