@@ -1,7 +1,10 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +22,8 @@ public class MoreInfoFileController implements Initializable {
     public TextField price1Field;
     public TextField price2Field;
     public TextField price3Field;
+    public Button rentCarBtn;
+    public Button cancelBtn;
 
     public MoreInfoFileController() {
     }
@@ -56,7 +61,16 @@ public class MoreInfoFileController implements Initializable {
             }
             else{
                 availableField.getStyleClass().add("no");
+                rentCarBtn.setDisable(true);
             }
         }
+    }
+
+    public void onRentThisCar(ActionEvent actionEvent) {
+    }
+
+    public void onCancel(ActionEvent actionEvent) {
+        Stage stage = (Stage) nameField.getScene().getWindow();
+        stage.close();
     }
 }
