@@ -92,4 +92,7 @@ public class ClientFileController implements Initializable {
 
     public void onInfoBtn(ActionEvent actionEvent) {
     }
+
+    public void onRentBtn(ActionEvent actionEvent) {
+    }
 }

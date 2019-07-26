@@ -18,3 +18,10 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position:center;
 }
+
+#rentBtn {
+    -fx-background-image: url("/img/rentIcon.png");
+    -fx-background-size: 68 51;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
