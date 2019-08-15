@@ -52,7 +52,7 @@ public class MoreInfoFileController implements Initializable {
             nmbSeatsField.setText(String.valueOf(vehicle.getNmbSeats()));
             engineField.setText(vehicle.getEngine());
             availableField.setText(vehicle.getAvailable());
-            mainPriceField.setText(String.valueOf(vehicle.getPrice()));
+            mainPriceField.setText(String.valueOf(vehicle.getPrice()) + " KM");
             int minPrice1 = vehicle.getPrice();
             int maxPrice1 = 3 * vehicle.getPrice();
             String forPrice1 = minPrice1 + " - " + maxPrice1;
