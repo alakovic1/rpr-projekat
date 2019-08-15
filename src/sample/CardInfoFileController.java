@@ -27,6 +27,8 @@ public class CardInfoFileController implements Initializable {
     public boolean cardNmbValid = false;
     public boolean expDateValid = false;
     public boolean secCodeValid = false;
+    public boolean firstNameValid = false;
+    public boolean lastNameValid = false;
 
     public CardInfoFileController(Vehicle vehicle, Person person, double currentPrice) {
         this.vehicle = vehicle;
@@ -40,24 +42,24 @@ public class CardInfoFileController implements Initializable {
     }
 
     private boolean isFormValid(){
-        return cardNmbValid && expDateValid && secCodeValid;
+        return cardNmbValid && expDateValid && secCodeValid && firstNameValid && lastNameValid;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fullPrice.setText(String.valueOf(currentPrice) + " KM");
-        firstName.setText(person.getFirstName());
-        lastName.setText(person.getLastName());
 
         cardNmb.getStyleClass().add("no");
         expDate.getStyleClass().add("no");
         secCode.getStyleClass().add("no");
-        firstName.getStyleClass().add("yes");
-        lastName.getStyleClass().add("yes");
+        firstName.getStyleClass().add("no");
+        lastName.getStyleClass().add("no");
 
         cardNmbValid = false;
         expDateValid = false;
         secCodeValid = false;
+        firstNameValid = false;
+        lastNameValid = false;
 
         cardNmb.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -100,6 +102,36 @@ public class CardInfoFileController implements Initializable {
                     secCode.getStyleClass().removeAll("yes");
                     secCode.getStyleClass().add("no");
                     secCodeValid = false;
+                }
+            }
+        });
+
+        firstName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (valid(n)) {
+                    firstName.getStyleClass().removeAll("no");
+                    firstName.getStyleClass().add("yes");
+                    firstNameValid = true;
+                } else {
+                    firstName.getStyleClass().removeAll("yes");
+                    firstName.getStyleClass().add("no");
+                    firstNameValid = false;
+                }
+            }
+        });
+
+        lastName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (valid(n)) {
+                    lastName.getStyleClass().removeAll("no");
+                    lastName.getStyleClass().add("yes");
+                    lastNameValid = true;
+                } else {
+                    lastName.getStyleClass().removeAll("yes");
+                    lastName.getStyleClass().add("no");
+                    lastNameValid = false;
                 }
             }
         });
