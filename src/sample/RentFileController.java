@@ -3,10 +3,16 @@ package sample;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Region;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -101,11 +107,30 @@ public class RentFileController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm");
             alert.setHeaderText("Are you sure you want to rent this car?");
-            alert.setContentText("OK for yes!");
+            alert.setContentText("Full price for this car will be: " + vehicle.getPrice() + " KM.\nClick OK for yes!");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                //todo uraditi potvrdu sa ispisom cijene
+                if(nowCheckBox.isSelected()) {
+                    Parent root = null;
+                    try {
+                        Stage primaryStage = new Stage();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cardInfoFile.fxml"));
+                        CardInfoFileController controller = new CardInfoFileController(vehicle, person);
+                        loader.setController(controller);
+                        root = loader.load();
+                        primaryStage.setTitle("Card Info");
+                        primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+                        primaryStage.initModality(Modality.APPLICATION_MODAL);
+                        primaryStage.setResizable(false);
+                        primaryStage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(shopCheckBox.isSelected()){
+
+                }
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
