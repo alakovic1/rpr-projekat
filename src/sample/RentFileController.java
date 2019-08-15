@@ -14,8 +14,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class RentFileController implements Initializable {
     public Vehicle vehicle;
@@ -49,6 +52,11 @@ public class RentFileController implements Initializable {
     private boolean isFormValid() {
         if (!nowCheckBox.isSelected() && !shopCheckBox.isSelected()) return false;
         if (!pickupDateValidate || !returnDateValidate) return false;
+        return true;
+    }
+
+    private boolean areDatesOkay(){
+        if(pickupDate.getValue().isAfter(returnDate.getValue())) return false;
         return true;
     }
 
@@ -103,40 +111,68 @@ public class RentFileController implements Initializable {
     }
 
     public void onFinish(ActionEvent actionEvent) {
-        if (isFormValid()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm");
-            alert.setHeaderText("Are you sure you want to rent this car?");
-            alert.setContentText("Full price for this car will be: " + vehicle.getPrice() + " KM.\nClick OK for yes!");
+        if(areDatesOkay()) {
+            long daysBetween = DAYS.between(pickupDate.getValue(), returnDate.getValue());
+            if(daysBetween <= 60) {
+                if (isFormValid()) {
+                    double currentPrice = 0;
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                if(nowCheckBox.isSelected()) {
-                    Parent root = null;
-                    try {
-                        Stage primaryStage = new Stage();
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cardInfoFile.fxml"));
-                        CardInfoFileController controller = new CardInfoFileController(vehicle, person);
-                        loader.setController(controller);
-                        root = loader.load();
-                        primaryStage.setTitle("Card Info");
-                        primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
-                        primaryStage.initModality(Modality.APPLICATION_MODAL);
-                        primaryStage.setResizable(false);
-                        primaryStage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (daysBetween < 3) {
+                        currentPrice = daysBetween * vehicle.getPrice();
+                    } else if (daysBetween >= 3 && daysBetween <= 15) {
+                        currentPrice = daysBetween * (vehicle.getPrice() - 0.09);
+                    } else if (daysBetween > 15 && daysBetween <= 60) {
+                        currentPrice = daysBetween * (vehicle.getPrice() - 0.2);
                     }
-                }
-                else if(shopCheckBox.isSelected()){
 
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirm");
+                    alert.setHeaderText("Are you sure you want to rent this car?");
+                    alert.setContentText("Full price for this car will be: " + currentPrice + " KM.\nClick OK for yes!");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        if (nowCheckBox.isSelected()) {
+                            Parent root = null;
+                            try {
+                                Stage primaryStage = new Stage();
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cardInfoFile.fxml"));
+                                CardInfoFileController controller = new CardInfoFileController(vehicle, person);
+                                loader.setController(controller);
+                                root = loader.load();
+                                primaryStage.setTitle("Card Info");
+                                primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+                                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                                primaryStage.setResizable(false);
+                                primaryStage.show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else if (shopCheckBox.isSelected()) {
+
+                        }
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("You didn't fill all fields");
+                    alert.setContentText("Please fill all red fields or check the payment if you didn't...");
+                    alert.show();
                 }
             }
-        } else {
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Try again");
+                alert.setContentText("We are sorry, but you can only rent a car up to 60 days");
+                alert.show();
+            }
+        }
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
-            alert.setHeaderText("You didn't fill all fields");
-            alert.setContentText("Please fill all red fields or check the payment if you didn't...");
+            alert.setHeaderText("Try again");
+            alert.setContentText("Dates aren't correct!\n Please choose your dates again.");
             alert.show();
         }
     }
