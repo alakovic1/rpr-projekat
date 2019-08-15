@@ -19,10 +19,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static java.time.temporal.ChronoUnit.DAYS;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class RentFileController implements Initializable {
     public Vehicle vehicle;
     public Person person;
+    public static Stage stagee;
+
     public TextField vehicleInfoField;
     public DatePicker pickupDate;
     public DatePicker returnDate;
@@ -108,9 +111,25 @@ public class RentFileController implements Initializable {
     public void onClose(ActionEvent actionEvent) {
         Stage stage = (Stage) vehicleInfoField.getScene().getWindow();
         stage.close();
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+            ClientFileController controller = new ClientFileController(person);
+            loader.setController(controller);
+            root = loader.load();
+            primaryStage.setTitle("Client File");
+            primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onFinish(ActionEvent actionEvent) {
+        stagee = (Stage) vehicleInfoField.getScene().getWindow();
         if(areDatesOkay()) {
             long daysBetween = DAYS.between(pickupDate.getValue(), returnDate.getValue());
             if(daysBetween <= 60) {

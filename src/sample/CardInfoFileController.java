@@ -3,13 +3,21 @@ package sample;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class CardInfoFileController implements Initializable {
     public Vehicle vehicle;
@@ -139,7 +147,24 @@ public class CardInfoFileController implements Initializable {
 
     public void isOk(ActionEvent actionEvent) {
         if(isFormValid()){
-
+            Parent root = null;
+            try {
+                Stage stage = (Stage) fullPrice.getScene().getWindow();
+                stage.close();
+                RentFileController.stagee.close();
+                Stage primaryStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                ClientFileController controller = new ClientFileController(person);
+                loader.setController(controller);
+                root = loader.load();
+                primaryStage.setTitle("Client File");
+                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                primaryStage.setResizable(false);
+                primaryStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

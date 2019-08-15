@@ -113,6 +113,8 @@ public class ClientFileController implements Initializable {
         if(vehicle == null) return;
         Parent root = null;
         try {
+            Stage stage = (Stage) logoutBtn.getScene().getWindow();
+            stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/moreInfoFile.fxml"));
             MoreInfoFileController controller = new MoreInfoFileController(vehicle, person);
@@ -134,6 +136,8 @@ public class ClientFileController implements Initializable {
         if(vehicle.getAvailable().equals("yes")) {
             Parent root = null;
             try {
+                Stage stage = (Stage) logoutBtn.getScene().getWindow();
+                stage.close();
                 Stage primaryStage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentFile.fxml"));
                 RentFileController controller = new RentFileController(vehicle, person);
