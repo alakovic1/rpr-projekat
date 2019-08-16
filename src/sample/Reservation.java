@@ -8,7 +8,7 @@ public class Reservation {
     private Vehicle vehicle;
     private Date pickupDate;
     private Date returnDate;
-    private int cardNumber;
+    private String cardNumber;
     private String expirationDate;
     private int securityCode;
     private String firstName;
@@ -17,7 +17,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int id, Person person, Vehicle vehicle, Date pickupDate, Date returnDate, int cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
+    public Reservation(int id, Person person, Vehicle vehicle, Date pickupDate, Date returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
         this.id = id;
         this.person = person;
         this.vehicle = vehicle;
@@ -30,7 +30,7 @@ public class Reservation {
         this.lastName = lastName;
     }
 
-    public Reservation(Person person, Vehicle vehicle, Date pickupDate, Date returnDate, int cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
+    public Reservation(Person person, Vehicle vehicle, Date pickupDate, Date returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
         this.person = person;
         this.vehicle = vehicle;
         this.pickupDate = pickupDate;
@@ -82,11 +82,11 @@ public class Reservation {
         this.returnDate = returnDate;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 

@@ -157,7 +157,7 @@ public class CardInfoFileController implements Initializable {
 
     public void isOk(ActionEvent actionEvent) {
         if(isFormValid()){
-            rentacarDAOdb.addReservation(new Reservation(person, vehicle, Date.valueOf(pickupDate), Date.valueOf(returnDate), Integer.parseInt(cardNmb.getText()), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
+            rentacarDAOdb.addReservation(new Reservation(person, vehicle, Date.valueOf(pickupDate), Date.valueOf(returnDate), cardNmb.getText(), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
             Parent root = null;
             try {
                 Stage stage = (Stage) fullPrice.getScene().getWindow();
