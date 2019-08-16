@@ -15,6 +15,15 @@ public class Reservation {
     private String lastName;
 
     public Reservation() {
+        this.person = new Person();
+        this.vehicle = new Vehicle();
+        this.pickupDate = new Date();
+        this.returnDate = new Date();
+        this.cardNumber = "0000 0000 0000 0000";
+        this.expirationDate = "00/00";
+        this.securityCode = 0;
+        this.firstName = "";
+        this.lastName = "";
     }
 
     public Reservation(int id, Person person, Vehicle vehicle, Date pickupDate, Date returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
@@ -40,6 +49,13 @@ public class Reservation {
         this.securityCode = securityCode;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Reservation(Person person, Vehicle vehicle, Date pickupDate, Date returnDate) {
+        this.person = person;
+        this.vehicle = vehicle;
+        this.pickupDate = pickupDate;
+        this.returnDate = returnDate;
     }
 
     public int getId() {

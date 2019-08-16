@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -25,6 +25,7 @@ public class RentFileController implements Initializable {
     public Vehicle vehicle;
     public Person person;
     public static Stage stagee;
+    private RentACarDAODatabase rentacarDAOdb;
 
     public TextField vehicleInfoField;
     public DatePicker pickupDate;
@@ -45,6 +46,8 @@ public class RentFileController implements Initializable {
     public RentFileController(Vehicle vehicle, Person person) {
         this.vehicle = vehicle;
         this.person = person;
+
+        rentacarDAOdb = RentACarDAODatabase.getInstance();
     }
 
     private boolean isValidDate(String n) {
@@ -168,7 +171,26 @@ public class RentFileController implements Initializable {
                                 e.printStackTrace();
                             }
                         } else if (shopCheckBox.isSelected()) {
-
+                            vehicle.setAvailable("no");
+                            rentacarDAOdb.updateVehicle(vehicle);
+                            rentacarDAOdb.addReservation(new Reservation(person, vehicle, java.sql.Date.valueOf(pickupDate.getValue()), Date.valueOf(returnDate.getValue())));
+                            Stage stage = (Stage) vehicleInfoField.getScene().getWindow();
+                            stage.close();
+                            Parent root = null;
+                            try {
+                                Stage primaryStage = new Stage();
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
+                                ClientFileController controller = new ClientFileController(person);
+                                loader.setController(controller);
+                                root = loader.load();
+                                primaryStage.setTitle("Client File");
+                                primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                                primaryStage.setResizable(false);
+                                primaryStage.show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 } else {
