@@ -157,6 +157,8 @@ public class CardInfoFileController implements Initializable {
 
     public void isOk(ActionEvent actionEvent) {
         if(isFormValid()){
+            vehicle.setAvailable("no");
+            rentacarDAOdb.updateVehicle(vehicle);
             rentacarDAOdb.addReservation(new Reservation(person, vehicle, Date.valueOf(pickupDate), Date.valueOf(returnDate), cardNmb.getText(), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
             Parent root = null;
             try {

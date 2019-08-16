@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -49,6 +49,7 @@ public class RentACarDAODatabase {
             newReservationID = connection.prepareStatement("SELECT MAX(id)+1 FROM reservation");
             getPersonResUpit = connection.prepareStatement("SELECT * FROM person WHERE id=?");
             getVehicleResUpit = connection.prepareStatement("SELECT * FROM vehicle WHERE id=?");
+            updateVehicleUpit = connection.prepareStatement("UPDATE vehicle SET name=?, brand=?, model=?, nmbDoors=?, nmbSeats=?, engine=?, available=?, price=? WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,16 +131,6 @@ public class RentACarDAODatabase {
             getPersonResUpit.setInt(1, person.getId());
             ResultSet rs = getPersonResUpit.executeQuery();
             if (!rs.next()) return null;
-            /*if (!rs.next()) {
-                int noviId = 1;
-                ResultSet rs2 = dajNoviIdMjestaUpit.executeQuery();
-                if (rs2.next()) noviId = rs2.getInt(1);
-                dodajMjestoUpit.setInt(1, noviId);
-                dodajMjestoUpit.setString(2, mjesto.getNaziv());
-                dodajMjestoUpit.setString(3, mjesto.getPostanskiBroj());
-                dodajMjestoUpit.executeUpdate();
-                mjesto.setId(noviId);
-            }*/
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -151,16 +142,6 @@ public class RentACarDAODatabase {
             getVehicleResUpit.setInt(1, vehicle.getId());
             ResultSet rs = getVehicleResUpit.executeQuery();
             if (!rs.next()) return null;
-            /*if (!rs.next()) {
-                int noviId = 1;
-                ResultSet rs2 = dajNoviIdMjestaUpit.executeQuery();
-                if (rs2.next()) noviId = rs2.getInt(1);
-                dodajMjestoUpit.setInt(1, noviId);
-                dodajMjestoUpit.setString(2, mjesto.getNaziv());
-                dodajMjestoUpit.setString(3, mjesto.getPostanskiBroj());
-                dodajMjestoUpit.executeUpdate();
-                mjesto.setId(noviId);
-            }*/
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -191,5 +172,23 @@ public class RentACarDAODatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateVehicle(Vehicle vehicle) {
+        try {
+            updateVehicleUpit.setInt(9, vehicle.getId());
+            updateVehicleUpit.setString(1, vehicle.getName());
+            updateVehicleUpit.setString(2, vehicle.getBrand());
+            updateVehicleUpit.setString(3, vehicle.getModel());
+            updateVehicleUpit.setInt(4, vehicle.getNmbDoors());
+            updateVehicleUpit.setInt(5, vehicle.getNmbSeats());
+            updateVehicleUpit.setString(6, vehicle.getEngine());
+            updateVehicleUpit.setString(7, vehicle.getAvailable());
+            updateVehicleUpit.setInt(8, vehicle.getPrice());
+            updateVehicleUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
