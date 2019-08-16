@@ -156,7 +156,7 @@ public class RentFileController implements Initializable {
                             try {
                                 Stage primaryStage = new Stage();
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cardInfoFile.fxml"));
-                                CardInfoFileController controller = new CardInfoFileController(vehicle, person, currentPrice);
+                                CardInfoFileController controller = new CardInfoFileController(vehicle, person, currentPrice, pickupDate.getValue(), returnDate.getValue());
                                 loader.setController(controller);
                                 root = loader.load();
                                 primaryStage.setTitle("Card Info");

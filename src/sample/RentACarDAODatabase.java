@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -45,6 +45,10 @@ public class RentACarDAODatabase {
             addPersonUpit = connection.prepareStatement("INSERT INTO person VALUES(?,?,?,?,?,?,?)");
             newPersonID = connection.prepareStatement("SELECT MAX(id)+1 FROM person");
             getVehiclesUpit = connection.prepareStatement("SELECT * FROM vehicle");
+            addReservationUpit = connection.prepareStatement("INSERT INTO reservation VALUES(?,?,?,?,?,?,?,?,?,?)");
+            newReservationID = connection.prepareStatement("SELECT MAX(id)+1 FROM reservation");
+            getPersonResUpit = connection.prepareStatement("SELECT * FROM person WHERE id=?");
+            getVehicleResUpit = connection.prepareStatement("SELECT * FROM vehicle WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,6 +120,74 @@ public class RentACarDAODatabase {
             addPersonUpit.setString(7,person.getPassword());
 
             addPersonUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Person findPerson(Person person) {
+        try {
+            getPersonResUpit.setInt(1, person.getId());
+            ResultSet rs = getPersonResUpit.executeQuery();
+            if (!rs.next()) return null;
+            /*if (!rs.next()) {
+                int noviId = 1;
+                ResultSet rs2 = dajNoviIdMjestaUpit.executeQuery();
+                if (rs2.next()) noviId = rs2.getInt(1);
+                dodajMjestoUpit.setInt(1, noviId);
+                dodajMjestoUpit.setString(2, mjesto.getNaziv());
+                dodajMjestoUpit.setString(3, mjesto.getPostanskiBroj());
+                dodajMjestoUpit.executeUpdate();
+                mjesto.setId(noviId);
+            }*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
+    }
+
+    private Vehicle findVehicle(Vehicle vehicle) {
+        try {
+            getVehicleResUpit.setInt(1, vehicle.getId());
+            ResultSet rs = getVehicleResUpit.executeQuery();
+            if (!rs.next()) return null;
+            /*if (!rs.next()) {
+                int noviId = 1;
+                ResultSet rs2 = dajNoviIdMjestaUpit.executeQuery();
+                if (rs2.next()) noviId = rs2.getInt(1);
+                dodajMjestoUpit.setInt(1, noviId);
+                dodajMjestoUpit.setString(2, mjesto.getNaziv());
+                dodajMjestoUpit.setString(3, mjesto.getPostanskiBroj());
+                dodajMjestoUpit.executeUpdate();
+                mjesto.setId(noviId);
+            }*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicle;
+    }
+
+    public void addReservation(Reservation reservation){
+        try {
+            reservation.setPerson(findPerson(reservation.getPerson()));
+            reservation.setVehicle(findVehicle(reservation.getVehicle()));
+
+            ResultSet rs = newReservationID.executeQuery();
+            int id = 1;
+            if(rs.next()) id = rs.getInt(1);
+
+            addReservationUpit.setInt(1,id);
+            addReservationUpit.setInt(2,reservation.getPerson().getId());
+            addReservationUpit.setInt(3,reservation.getVehicle().getId());
+            addReservationUpit.setDate(4, (Date) reservation.getPickupDate());
+            addReservationUpit.setDate(5, (Date) reservation.getReturnDate());
+            addReservationUpit.setInt(6,reservation.getCardNumber());
+            addReservationUpit.setString(7,reservation.getExpirationDate());
+            addReservationUpit.setInt(8,reservation.getSecurityCode());
+            addReservationUpit.setString(9,reservation.getFirstName());
+            addReservationUpit.setString(10,reservation.getLastName());
+
+            addReservationUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
