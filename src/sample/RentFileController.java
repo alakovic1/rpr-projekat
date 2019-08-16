@@ -191,7 +191,7 @@ public class RentFileController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Try again");
-            alert.setContentText("Dates aren't correct!\n Please choose your dates again.");
+            alert.setContentText("Dates aren't correct!\nPlease choose your dates again.");
             alert.show();
         }
     }

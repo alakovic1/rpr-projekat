@@ -59,6 +59,38 @@ public class CardInfoFileController implements Initializable {
         return true;
     }
 
+    private boolean validCard(String n){
+        if(n.length() == 16) return true;
+        return false;
+    }
+
+    private boolean validExpDate(String n){
+        if(n.length() != 5) return false;
+        boolean there = false;
+        String s = "";
+        String s1 = "";
+        int br = 0;
+        for(int i = 0; i < n.length(); i++){
+            if(n.charAt(i) == '/') {
+                there = true;
+                br++;
+            }
+            if(there && br > 0) s += n.charAt(i);
+            if(!there) s1 += n.charAt(i);
+        }
+        if(!there) return false;
+        String now = String.valueOf(LocalDate.now().getYear()).substring(2, 4);
+        s = s.substring(1, 3);
+        if(Integer.parseInt(s) < Integer.parseInt(now)) return false;
+        if(Integer.parseInt(s1) <= 0 || Integer.parseInt(s1) > 12) return false;
+        return true;
+    }
+
+    private boolean validSecCode(String n){
+        if(n.length() == 3 || n.length() == 4) return true;
+        return false;
+    }
+
     private boolean isFormValid(){
         return cardNmbValid && expDateValid && secCodeValid && firstNameValid && lastNameValid;
     }
@@ -82,7 +114,7 @@ public class CardInfoFileController implements Initializable {
         cardNmb.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (valid(n)) {
+                if (validCard(n)) {
                     cardNmb.getStyleClass().removeAll("no");
                     cardNmb.getStyleClass().add("yes");
                     cardNmbValid = true;
@@ -97,7 +129,7 @@ public class CardInfoFileController implements Initializable {
         expDate.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (valid(n)) {
+                if (validExpDate(n)) {
                     expDate.getStyleClass().removeAll("no");
                     expDate.getStyleClass().add("yes");
                     expDateValid = true;
@@ -112,7 +144,7 @@ public class CardInfoFileController implements Initializable {
         secCode.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (valid(n)) {
+                if (validSecCode(n)) {
                     secCode.getStyleClass().removeAll("no");
                     secCode.getStyleClass().add("yes");
                     secCodeValid = true;
@@ -182,7 +214,7 @@ public class CardInfoFileController implements Initializable {
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
-            alert.setHeaderText("You didn't fill all fields");
+            alert.setHeaderText("You didn't fill all fields or your card expired");
             alert.setContentText("Please fill all red fields or check the payment if you didn't...");
             alert.show();
         }
