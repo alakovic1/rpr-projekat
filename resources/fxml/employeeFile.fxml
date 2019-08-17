@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.EmployeeFileController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<?import java.net.URL?>
+<AnchorPane fx:id="back" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EmployeeFileController">
+    <stylesheets>
+        <URL value="@/css/start.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="logoutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="23.0" prefWidth="70.0" text="Logout" />
+      <TabPane layoutY="52.0" prefHeight="348.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Label alignment="CENTER" layoutX="208.0" layoutY="12.0" prefHeight="27.0" prefWidth="202.0" text="Welcome">
+         <font>
+            <Font name="Avenir Next Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
