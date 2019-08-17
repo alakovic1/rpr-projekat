@@ -6,8 +6,8 @@ public class Reservation {
     private int id;
     private Person person;
     private Vehicle vehicle;
-    private Date pickupDate;
-    private Date returnDate;
+    private String pickupDate;
+    private String returnDate;
     private String cardNumber;
     private String expirationDate;
     private int securityCode;
@@ -17,8 +17,8 @@ public class Reservation {
     public Reservation() {
         this.person = new Person();
         this.vehicle = new Vehicle();
-        this.pickupDate = new Date();
-        this.returnDate = new Date();
+        this.pickupDate = "";
+        this.returnDate = "";
         this.cardNumber = "0000 0000 0000 0000";
         this.expirationDate = "00/00";
         this.securityCode = 0;
@@ -26,7 +26,7 @@ public class Reservation {
         this.lastName = "";
     }
 
-    public Reservation(int id, Person person, Vehicle vehicle, Date pickupDate, Date returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
+    public Reservation(int id, Person person, Vehicle vehicle, String pickupDate, String returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
         this.id = id;
         this.person = person;
         this.vehicle = vehicle;
@@ -39,7 +39,7 @@ public class Reservation {
         this.lastName = lastName;
     }
 
-    public Reservation(Person person, Vehicle vehicle, Date pickupDate, Date returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
+    public Reservation(Person person, Vehicle vehicle, String pickupDate, String returnDate, String cardNumber, String expirationDate, int securityCode, String firstName, String lastName) {
         this.person = person;
         this.vehicle = vehicle;
         this.pickupDate = pickupDate;
@@ -51,7 +51,7 @@ public class Reservation {
         this.lastName = lastName;
     }
 
-    public Reservation(Person person, Vehicle vehicle, Date pickupDate, Date returnDate) {
+    public Reservation(Person person, Vehicle vehicle, String pickupDate, String returnDate) {
         this.person = person;
         this.vehicle = vehicle;
         this.pickupDate = pickupDate;
@@ -82,19 +82,19 @@ public class Reservation {
         this.vehicle = vehicle;
     }
 
-    public Date getPickupDate() {
+    public String getPickupDate() {
         return pickupDate;
     }
 
-    public void setPickupDate(Date pickupDate) {
+    public void setPickupDate(String pickupDate) {
         this.pickupDate = pickupDate;
     }
 
-    public Date getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 

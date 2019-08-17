@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -173,7 +175,12 @@ public class RentFileController implements Initializable {
                         } else if (shopCheckBox.isSelected()) {
                             vehicle.setAvailable("no");
                             rentacarDAOdb.updateVehicle(vehicle);
-                            rentacarDAOdb.addReservation(new Reservation(person, vehicle, java.sql.Date.valueOf(pickupDate.getValue()), Date.valueOf(returnDate.getValue())));
+                            DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+                            String text = pickupDate.getValue().format(formatters);
+                            LocalDate parsedDate = LocalDate.parse(text, formatters);
+                            String text2 = returnDate.getValue().format(formatters);
+                            LocalDate parsedDate2 = LocalDate.parse(text2, formatters);
+                            rentacarDAOdb.addReservation(new Reservation(person, vehicle, parsedDate.format(formatters), parsedDate2.format(formatters)));
                             Stage stage = (Stage) vehicleInfoField.getScene().getWindow();
                             stage.close();
                             Parent root = null;

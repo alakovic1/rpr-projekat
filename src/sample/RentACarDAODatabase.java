@@ -160,8 +160,8 @@ public class RentACarDAODatabase {
             addReservationUpit.setInt(1,id);
             addReservationUpit.setInt(2,reservation.getPerson().getId());
             addReservationUpit.setInt(3,reservation.getVehicle().getId());
-            addReservationUpit.setDate(4, (Date) reservation.getPickupDate());
-            addReservationUpit.setDate(5, (Date) reservation.getReturnDate());
+            addReservationUpit.setString(4, reservation.getPickupDate());
+            addReservationUpit.setString(5, reservation.getReturnDate());
             addReservationUpit.setString(6,reservation.getCardNumber());
             addReservationUpit.setString(7,reservation.getExpirationDate());
             addReservationUpit.setInt(8,reservation.getSecurityCode());

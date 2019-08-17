@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -191,7 +192,12 @@ public class CardInfoFileController implements Initializable {
         if(isFormValid()){
             vehicle.setAvailable("no");
             rentacarDAOdb.updateVehicle(vehicle);
-            rentacarDAOdb.addReservation(new Reservation(person, vehicle, Date.valueOf(pickupDate), Date.valueOf(returnDate), cardNmb.getText(), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
+            DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+            String text = pickupDate.format(formatters);
+            LocalDate parsedDate = LocalDate.parse(text, formatters);
+            String text2 = returnDate.format(formatters);
+            LocalDate parsedDate2 = LocalDate.parse(text2, formatters);
+            rentacarDAOdb.addReservation(new Reservation(person, vehicle, parsedDate.format(formatters), parsedDate2.format(formatters), cardNmb.getText(), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
             Parent root = null;
             try {
                 Stage stage = (Stage) fullPrice.getScene().getWindow();
