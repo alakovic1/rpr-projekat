@@ -46,3 +46,28 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position:center;
 }
+
+#addVehicleBtn {
+    -fx-background-image: url("/img/addIcon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
+#editVehicleBtn {
+    -fx-background-image: url("/img/editIcon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
+#deleteVehicleBtn {
+    -fx-background-image: url("/img/deleteIcon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
+
+
+
