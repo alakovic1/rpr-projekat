@@ -37,6 +37,13 @@ public class EmployeeFileController implements Initializable {
     public Button addVehicleBtn;
     public Button editVehicleBtn;
     public Button deleteVehicleBtn;
+    public TableView<Reservation> tableReservations;
+    public ChoiceBox<String> choiceBox2;
+    public TextField searchBar2;
+    public Label infoLabel2;
+    public Button addReservationBtn;
+    public Button editReservationBtn;
+    public Button deleteReservationBtn;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -75,7 +82,9 @@ public class EmployeeFileController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         infoLabel.setText("Program running");
+        infoLabel2.setText("Program running");
         choiceBox.getSelectionModel().selectFirst();
+        choiceBox2.getSelectionModel().selectFirst();
 
         FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
         tableVehicles.setItems(filteredList);
@@ -107,5 +116,14 @@ public class EmployeeFileController implements Initializable {
                     break;
             }
         });
+    }
+
+    public void onAddVReservation(ActionEvent actionEvent) {
+    }
+
+    public void onEditReservation(ActionEvent actionEvent) {
+    }
+
+    public void onDeleteReservation(ActionEvent actionEvent) {
     }
 }

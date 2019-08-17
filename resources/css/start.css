@@ -68,6 +68,27 @@
     -fx-background-position:center;
 }
 
+#addReservationBtn {
+    -fx-background-image: url("/img/addIcon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
+#editReservationBtn {
+    -fx-background-image: url("/img/editIcon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
+#deleteReservationBtn {
+    -fx-background-image: url("/img/deleteIcon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+}
+
 
 
 

@@ -68,7 +68,37 @@
           </Tab>
           <Tab text="Reservations">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                      <TableView fx:id="tableReservations" layoutY="72.0" prefHeight="216.0" prefWidth="600.0">
+                          <columns>
+                              <TableColumn fx:id="c1" prefWidth="68.0" text="Name" />
+                              <TableColumn fx:id="c2" prefWidth="68.0" text="Name" />
+                          </columns>
+                      </TableView>
+                      <ChoiceBox fx:id="choiceBox2" layoutX="14.0" layoutY="36.0" prefHeight="27.0" prefWidth="120.0">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Pickup date" />
+                                  <String fx:value="Return date" />
+                              </FXCollections>
+                          </items>
+                      </ChoiceBox>
+                      <Label layoutX="14.0" layoutY="6.0" prefHeight="30.0" prefWidth="182.0" text="Choose a category and search cars:">
+                          <font>
+                              <Font name="System Italic" size="10.0" />
+                          </font>
+                      </Label>
+                      <TextField fx:id="searchBar2" layoutX="139.0" layoutY="36.0" prefHeight="27.0" prefWidth="120.0" promptText="Search" />
+                      <Label fx:id="infoLabel2" alignment="CENTER" layoutX="2.0" layoutY="287.0" prefHeight="30.0" prefWidth="600.0">
+                          <font>
+                              <Font size="11.0" />
+                          </font></Label>
+                      <Button fx:id="addReservationBtn" layoutX="282.0" layoutY="36.0" mnemonicParsing="false" onAction="#onAddVReservation" prefHeight="27.0" prefWidth="36.0" />
+                      <Button fx:id="editReservationBtn" layoutX="324.0" layoutY="36.0" mnemonicParsing="false" onAction="#onEditReservation" prefHeight="27.0" prefWidth="36.0" />
+                      <Separator layoutX="268.0" layoutY="32.0" orientation="VERTICAL" prefHeight="36.0" prefWidth="5.0" />
+                      <Button fx:id="deleteReservationBtn" layoutX="367.0" layoutY="36.0" mnemonicParsing="false" onAction="#onDeleteReservation" prefHeight="27.0" prefWidth="36.0" />
+                  </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
