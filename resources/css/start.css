@@ -26,6 +26,13 @@
     -fx-background-position:center;
 }
 
+#back4 {
+    -fx-background-image: url("/img/back.jpg");
+    -fx-background-size: 600 66;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:top;
+}
+
 #infoBtn {
     -fx-background-image: url("/img/moreInfo.png");
     -fx-background-size: 80 70;
