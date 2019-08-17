@@ -48,5 +48,10 @@
       <Button fx:id="logoutBtn" layoutX="27.0" layoutY="42.0" mnemonicParsing="false" onAction="#onLogOut" prefHeight="27.0" prefWidth="88.0" text="Logout" />
       <TextField fx:id="usernameClientField" editable="false" layoutX="27.0" layoutY="10.0" prefHeight="27.0" prefWidth="114.0" />
       <TextField fx:id="searchBar" layoutX="141.0" layoutY="95.0" promptText="Search" />
+      <Label layoutX="27.0" layoutY="76.0" prefHeight="20.0" prefWidth="245.0" text="Choose a category and search cars:">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
