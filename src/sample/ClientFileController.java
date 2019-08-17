@@ -3,8 +3,10 @@ package sample;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,19 +38,15 @@ public class ClientFileController implements Initializable {
     public TableColumn<Vehicle, String> columnEngine;
     public TableColumn<Vehicle, String> columnAvailable;
     public TableColumn<Vehicle, String> columnPrice;
-    public ComboBox boxFilter;
+    public ChoiceBox<String> boxFilter;
     public Button infoBtn;
     public Button rentBtn;
     public Button logoutBtn;
     public TextField usernameClientField;
+    public TextField searchBar;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
-
-    /*public ClientFileController() {
-        rentacarDAOdb = RentACarDAODatabase.getInstance();
-        listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
-    }*/
 
     public ClientFileController(Person person) {
         this.person = person;
@@ -58,8 +56,10 @@ public class ClientFileController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         usernameClientField.setText(person.getUsername());
-        boxFilter.getSelectionModel().selectFirst(); //todo uraditi za promjenu... filtriranje
-        tableofVehiclesClient.setItems(listOfVehicles);
+        boxFilter.getSelectionModel().selectFirst();
+
+        FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
+        tableofVehiclesClient.setItems(filteredList);
 
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
@@ -69,43 +69,25 @@ public class ClientFileController implements Initializable {
         columnEngine.setCellValueFactory(new PropertyValueFactory<>("engine"));
         columnAvailable.setCellValueFactory(new PropertyValueFactory<>("available"));
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-    }
 
-    public void onComboChange(ActionEvent actionEvent) {
-        //todo ovdje detetkovati promjenu u combobox, samo skontat kako uzeti selektovanu vrijednost
-        if(boxFilter.getSelectionModel().getSelectedIndex() == 1){
-            tableofVehiclesClient.setItems(listOfVehicles);
-
-            columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            columnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
-            columnModel.setCellValueFactory(new PropertyValueFactory<>("model"));
-            columnDoors.setCellValueFactory(new PropertyValueFactory<>("nmbDoors"));
-            columnSeats.setCellValueFactory(new PropertyValueFactory<>("nmbSeats"));
-            columnEngine.setCellValueFactory(new PropertyValueFactory<>("engine"));
-            columnAvailable.setCellValueFactory(new PropertyValueFactory<>("available"));
-            columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        }
-        else if(boxFilter.getSelectionModel().getSelectedIndex() == 2){
-            ObservableList<Vehicle> newList = listOfVehicles;
-            Collections.sort(newList, new Comparator<Vehicle>() {
-                @Override
-                public int compare(Vehicle o1, Vehicle o2) {
-                    return o1.getName().compareTo(o2.getName());
-                }
-            });
-
-            tableofVehiclesClient.setItems(newList);
-            //todo jedino sta mi je ostalo da bazu filtriram jer ne moze ovakooo...
-
-            /*columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            columnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
-            columnModel.setCellValueFactory(new PropertyValueFactory<>("model"));
-            columnDoors.setCellValueFactory(new PropertyValueFactory<>("nmbDoors"));
-            columnSeats.setCellValueFactory(new PropertyValueFactory<>("nmbSeats"));
-            columnEngine.setCellValueFactory(new PropertyValueFactory<>("engine"));
-            columnAvailable.setCellValueFactory(new PropertyValueFactory<>("available"));
-            columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));*/
-        }
+        searchBar.setOnKeyReleased(keyEvent ->
+        {
+            switch (boxFilter.getValue())
+            {
+                case "Name":
+                    filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                    break;
+                case "Brand":
+                    filteredList.setPredicate(p -> p.getBrand().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                    break;
+                case "Available":
+                    filteredList.setPredicate(p -> p.getAvailable().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                    break;
+                case "Price":
+                    filteredList.setPredicate(p -> String.valueOf(p.getPrice()).toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                    break;
+            }
+        });
     }
 
     public void onInfoBtn(ActionEvent actionEvent) {
