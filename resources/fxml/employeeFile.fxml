@@ -63,6 +63,11 @@
                         <Button fx:id="editVehicleBtn" layoutX="302.0" layoutY="36.0" mnemonicParsing="false" onAction="#onEditVehicle" prefHeight="27.0" prefWidth="36.0" />
                         <Separator layoutX="243.0" layoutY="29.0" orientation="VERTICAL" prefHeight="36.0" prefWidth="5.0" />
                         <Button fx:id="deleteVehicleBtn" layoutX="345.0" layoutY="36.0" mnemonicParsing="false" onAction="#onDeleteVehicle" prefHeight="27.0" prefWidth="36.0" />
+                        <Button fx:id="adminRentBtn" alignment="CENTER" layoutX="447.0" layoutY="34.0" mnemonicParsing="false" onAction="#onAdminRent" prefHeight="27.0" prefWidth="142.0" text="Rent car">
+                            <font>
+                                <Font name="Charter Roman" size="13.0" />
+                            </font>
+                        </Button>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -94,10 +99,14 @@
                           <font>
                               <Font size="11.0" />
                           </font></Label>
-                      <Button fx:id="addReservationBtn" layoutX="282.0" layoutY="36.0" mnemonicParsing="false" onAction="#onAddVReservation" prefHeight="27.0" prefWidth="36.0" />
-                      <Button fx:id="editReservationBtn" layoutX="324.0" layoutY="36.0" mnemonicParsing="false" onAction="#onEditReservation" prefHeight="27.0" prefWidth="36.0" />
+                      <Button fx:id="editReservationBtn" layoutX="284.0" layoutY="37.0" mnemonicParsing="false" onAction="#onEditReservation" prefHeight="27.0" prefWidth="36.0" />
                       <Separator layoutX="268.0" layoutY="32.0" orientation="VERTICAL" prefHeight="36.0" prefWidth="5.0" />
-                      <Button fx:id="deleteReservationBtn" layoutX="367.0" layoutY="36.0" mnemonicParsing="false" onAction="#onDeleteReservation" prefHeight="27.0" prefWidth="36.0" />
+                      <Button fx:id="deleteReservationBtn" layoutX="329.0" layoutY="37.0" mnemonicParsing="false" onAction="#onDeleteReservation" prefHeight="27.0" prefWidth="36.0" />
+                        <Button fx:id="adminCheckRes" alignment="CENTER" layoutX="448.0" layoutY="37.0" mnemonicParsing="false" onAction="#onAdminCheckRes" prefHeight="27.0" prefWidth="142.0" text="Check reservation">
+                           <font>
+                              <Font name="Charter Roman" size="13.0" />
+                           </font>
+                        </Button>
                   </children></AnchorPane>
             </content>
           </Tab>

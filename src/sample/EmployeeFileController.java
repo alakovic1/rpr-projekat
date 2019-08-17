@@ -41,7 +41,6 @@ public class EmployeeFileController implements Initializable {
     public ChoiceBox<String> choiceBox2;
     public TextField searchBar2;
     public Label infoLabel2;
-    public Button addReservationBtn;
     public Button editReservationBtn;
     public Button deleteReservationBtn;
 
@@ -125,5 +124,11 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onDeleteReservation(ActionEvent actionEvent) {
+    }
+
+    public void onAdminCheckRes(ActionEvent actionEvent) {
+    }
+
+    public void onAdminRent(ActionEvent actionEvent) {
     }
 }
