@@ -144,10 +144,18 @@ public class AddEditVehicleFileController implements Initializable {
     public void onOkClick(ActionEvent actionEvent) {
         if (vehicle == null) {
             if (isFormValid()) {
-                Vehicle newVehicle = new Vehicle(nameBox.getText(), brandBox.getText(), modelBox.getText(), nmbDoorsBox.getValue(), nmbSeatsBox.getValue(), engineBox.getValue(), "yes", Integer.valueOf(priceBox.getText()));
-                rentacarDAOdb.addVehicle(newVehicle);
-                Stage stage = (Stage) nameBox.getScene().getWindow();
-                stage.close();
+                try {
+                    Vehicle newVehicle = new Vehicle(nameBox.getText(), brandBox.getText(), modelBox.getText(), nmbDoorsBox.getValue(), nmbSeatsBox.getValue(), engineBox.getValue(), "yes", Integer.valueOf(priceBox.getText()));
+                    rentacarDAOdb.addVehicle(newVehicle);
+                    Stage stage = (Stage) nameBox.getScene().getWindow();
+                    stage.close();
+                } catch (Exception e){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("You didn't put integer number in price");
+                    alert.setContentText("Please fill price field correctly...");
+                    alert.show();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
@@ -156,17 +164,25 @@ public class AddEditVehicleFileController implements Initializable {
                 alert.show();
             }
         } else {
-            vehicle.setName(nameBox.getText());
-            vehicle.setBrand(brandBox.getText());
-            vehicle.setModel(modelBox.getText());
-            vehicle.setNmbDoors(nmbDoorsBox.getValue());
-            vehicle.setNmbSeats(nmbSeatsBox.getValue());
-            vehicle.setEngine(engineBox.getValue());
-            vehicle.setAvailable("yes");
-            vehicle.setPrice(Integer.valueOf(priceBox.getText()));
-            rentacarDAOdb.updateVehicle(vehicle);
-            Stage stage = (Stage) nameBox.getScene().getWindow();
-            stage.close();
+            try {
+                vehicle.setName(nameBox.getText());
+                vehicle.setBrand(brandBox.getText());
+                vehicle.setModel(modelBox.getText());
+                vehicle.setNmbDoors(nmbDoorsBox.getValue());
+                vehicle.setNmbSeats(nmbSeatsBox.getValue());
+                vehicle.setEngine(engineBox.getValue());
+                vehicle.setAvailable("yes");
+                vehicle.setPrice(Integer.valueOf(priceBox.getText()));
+                rentacarDAOdb.updateVehicle(vehicle);
+                Stage stage = (Stage) nameBox.getScene().getWindow();
+                stage.close();
+            } catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("You didn't put integer number in price");
+                alert.setContentText("Please fill price field correctly...");
+                alert.show();
+            }
         }
     }
 }
