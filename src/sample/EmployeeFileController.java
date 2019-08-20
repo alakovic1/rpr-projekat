@@ -78,7 +78,7 @@ public class EmployeeFileController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addEditVehicleFile.fxml"));
-            AddEditVehicleFileController controller = new AddEditVehicleFileController();
+            AddEditVehicleFileController controller = new AddEditVehicleFileController(null);
             loader.setController(controller);
             root = loader.load();
             primaryStage.setTitle("Add / Edit vehicle");
@@ -98,6 +98,33 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onEditVehicle(ActionEvent actionEvent) {
+        Vehicle vehicle = tableVehicles.getSelectionModel().getSelectedItem();
+        if(vehicle == null) {
+            infoLabel.setText("Choose a vehicle you want to edit");
+            return;
+        }
+        infoLabel.setText("Editing vehicle");
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addEditVehicleFile.fxml"));
+            AddEditVehicleFileController controller = new AddEditVehicleFileController(vehicle);
+            loader.setController(controller);
+            root = loader.load();
+            primaryStage.setTitle("Add / Edit vehicle");
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+
+            primaryStage.setOnHiding( event -> {
+                listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+                tableVehicles.setItems(listOfVehicles);
+                infoLabel.setText("Vehicle edited");
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onDeleteVehicle(ActionEvent actionEvent) {
