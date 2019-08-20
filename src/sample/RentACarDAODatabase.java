@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -50,6 +50,7 @@ public class RentACarDAODatabase {
             getPersonResUpit = connection.prepareStatement("SELECT * FROM person WHERE id=?");
             getVehicleResUpit = connection.prepareStatement("SELECT * FROM vehicle WHERE id=?");
             updateVehicleUpit = connection.prepareStatement("UPDATE vehicle SET name=?, brand=?, model=?, nmbDoors=?, nmbSeats=?, engine=?, available=?, price=? WHERE id=?");
+            removeVehicleUpit = connection.prepareStatement("DELETE FROM vehicle WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -190,5 +191,14 @@ public class RentACarDAODatabase {
             e.printStackTrace();
         }
 
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        try {
+            removeVehicleUpit.setInt(1, vehicle.getId());
+            removeVehicleUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

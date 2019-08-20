@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -43,6 +44,8 @@ public class EmployeeFileController implements Initializable {
     public Label infoLabel2;
     public Button editReservationBtn;
     public Button deleteReservationBtn;
+    public Button adminRentBtn;
+    public Button adminCheckRes;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -76,6 +79,28 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onDeleteVehicle(ActionEvent actionEvent) {
+        infoLabel.setText("Deleting a vehicle");
+        Vehicle vehicle = tableVehicles.getSelectionModel().getSelectedItem();
+        if(vehicle == null) {
+            infoLabel.setText("Choose a vehicle you want to delete");
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Potvrda brisanja");
+        alert.setHeaderText("Brisanje vozila ");
+        alert.setContentText("Da li ste sigurni da želite obrisati vozilo?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            rentacarDAOdb.removeVehicle(vehicle);
+            listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+            tableVehicles.setItems(listOfVehicles);
+            infoLabel.setText("Vehicle deleted");
+        }
+        else if(result.get() == ButtonType.CANCEL){
+            infoLabel.setText("Vehicle not deleted");
+        }
     }
 
     @Override
@@ -115,9 +140,6 @@ public class EmployeeFileController implements Initializable {
                     break;
             }
         });
-    }
-
-    public void onAddVReservation(ActionEvent actionEvent) {
     }
 
     public void onEditReservation(ActionEvent actionEvent) {
