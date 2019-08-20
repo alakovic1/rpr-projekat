@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -51,6 +51,8 @@ public class RentACarDAODatabase {
             getVehicleResUpit = connection.prepareStatement("SELECT * FROM vehicle WHERE id=?");
             updateVehicleUpit = connection.prepareStatement("UPDATE vehicle SET name=?, brand=?, model=?, nmbDoors=?, nmbSeats=?, engine=?, available=?, price=? WHERE id=?");
             removeVehicleUpit = connection.prepareStatement("DELETE FROM vehicle WHERE id=?");
+            newVehicleID = connection.prepareStatement("SELECT MAX(id)+1 FROM vehicle");
+            addVehicleUpit = connection.prepareStatement("INSERT INTO vehicle VALUES(?,?,?,?,?,?,?,?,?)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -197,6 +199,28 @@ public class RentACarDAODatabase {
         try {
             removeVehicleUpit.setInt(1, vehicle.getId());
             removeVehicleUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        try {
+            ResultSet rs = newVehicleID.executeQuery();
+            int id = 1;
+            if(rs.next()) id = rs.getInt(1);
+
+            addVehicleUpit.setInt(1,id);
+            addVehicleUpit.setString(2,vehicle.getName());
+            addVehicleUpit.setString(3,vehicle.getBrand());
+            addVehicleUpit.setString(4,vehicle.getModel());
+            addVehicleUpit.setInt(5,vehicle.getNmbDoors());
+            addVehicleUpit.setInt(6,vehicle.getNmbSeats());
+            addVehicleUpit.setString(7,vehicle.getEngine());
+            addVehicleUpit.setString(8,vehicle.getAvailable());
+            addVehicleUpit.setInt(9,vehicle.getPrice());
+
+            addVehicleUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

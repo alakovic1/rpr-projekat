@@ -73,6 +73,7 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onAddVehicle(ActionEvent actionEvent) {
+        infoLabel.setText("Adding new vehicle");
         Parent root = null;
         try {
             Stage primaryStage = new Stage();
@@ -85,6 +86,12 @@ public class EmployeeFileController implements Initializable {
             primaryStage.initModality(Modality.APPLICATION_MODAL);
             primaryStage.setResizable(false);
             primaryStage.show();
+
+            primaryStage.setOnHiding( event -> {
+                listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+                tableVehicles.setItems(listOfVehicles);
+                infoLabel.setText("Added new vehicle");
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

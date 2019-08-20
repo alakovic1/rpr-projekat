@@ -34,6 +34,17 @@ public class Vehicle {
         this.price = price;
     }
 
+    public Vehicle(String name, String brand, String model, int nmbDoors, int nmbSeats, String engine, String available, int price) {
+        this.name = name;
+        this.brand = brand;
+        this.model = model;
+        this.nmbDoors = nmbDoors;
+        this.nmbSeats = nmbSeats;
+        this.engine = engine;
+        this.available = available;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
