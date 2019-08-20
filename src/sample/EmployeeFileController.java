@@ -73,6 +73,21 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onAddVehicle(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addEditVehicleFile.fxml"));
+            AddEditVehicleFileController controller = new AddEditVehicleFileController();
+            loader.setController(controller);
+            root = loader.load();
+            primaryStage.setTitle("Add / Edit vehicle");
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onEditVehicle(ActionEvent actionEvent) {
