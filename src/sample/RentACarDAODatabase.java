@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -10,7 +13,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit, getPersonUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit, getPersonUpit, getReservationsUpit, deleteReservationUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -54,6 +57,8 @@ public class RentACarDAODatabase {
             newVehicleID = connection.prepareStatement("SELECT MAX(id)+1 FROM vehicle");
             addVehicleUpit = connection.prepareStatement("INSERT INTO vehicle VALUES(?,?,?,?,?,?,?,?,?)");
             getPersonUpit = connection.prepareStatement("SELECT * FROM person WHERE id=?");
+            getReservationsUpit = connection.prepareStatement("SELECT * FROM reservation");
+            deleteReservationUpit = connection.prepareStatement("DELETE FROM reservation WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -274,6 +279,41 @@ public class RentACarDAODatabase {
             addReservationUpit.setString(10,reservation.getLastName());
 
             addReservationUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Reservation>  reservations() {
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        try {
+            ResultSet rs = getReservationsUpit.executeQuery();
+            while (rs.next()) {
+                getPersonUpit.setInt(1, rs.getInt(2));
+                ResultSet rs2 = getPersonUpit.executeQuery();
+                Person person = null;
+                while (rs2.next()) {
+                    person = new Person(rs2.getInt(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5), rs2.getString(6), rs2.getString(7));
+                }
+
+                getVehicleResUpit.setInt(1, rs.getInt(3));
+                ResultSet rs3 = getVehicleResUpit.executeQuery();
+                Vehicle vehicle = null;
+                if (rs3.next()) {
+                    vehicle = new Vehicle(rs3.getInt(1), rs3.getString(2), rs3.getString(3), rs3.getString(4), rs3.getInt(5), rs3.getInt(6), rs3.getString(7), rs3.getString(8), rs3.getInt(9));
+                }
+                reservations.add(new Reservation(rs.getInt(1), person, vehicle, rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getString(10)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
+    }
+
+    public void deleteReservation(Reservation reservation) {
+        try {
+            deleteReservationUpit.setInt(1, reservation.getId());
+            deleteReservationUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

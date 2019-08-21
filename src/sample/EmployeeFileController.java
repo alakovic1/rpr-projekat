@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -46,13 +47,20 @@ public class EmployeeFileController implements Initializable {
     public Button deleteReservationBtn;
     public Button adminRentBtn;
     public Button adminCheckRes;
+    public TableColumn<Reservation, String> personColumn;
+    public TableColumn<Reservation, String> vehicleColumn;
+    public TableColumn<Reservation, String> pickupDateColumn;
+    public TableColumn<Reservation, String> returnDateColumn;
+    public TableColumn<Reservation, String> cardNumberColumn;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
+    private ObservableList<Reservation> listOfReservations;
 
     public EmployeeFileController() {
         rentacarDAOdb = RentACarDAODatabase.getInstance();
         listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+        listOfReservations = FXCollections.observableArrayList(rentacarDAOdb.reservations());
     }
 
     public void onLogout(ActionEvent actionEvent) {
@@ -87,14 +95,13 @@ public class EmployeeFileController implements Initializable {
             primaryStage.setResizable(false);
             primaryStage.show();
 
-            primaryStage.setOnHiding( event -> {
+            primaryStage.setOnHiding(event -> {
                 listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
                 FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
                 tableVehicles.setItems(filteredList);
                 searchBar.setOnKeyReleased(keyEvent ->
                 {
-                    switch (choiceBox.getValue())
-                    {
+                    switch (choiceBox.getValue()) {
                         case "Name":
                             filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
                             break;
@@ -118,7 +125,7 @@ public class EmployeeFileController implements Initializable {
 
     public void onEditVehicle(ActionEvent actionEvent) {
         Vehicle vehicle = tableVehicles.getSelectionModel().getSelectedItem();
-        if(vehicle == null) {
+        if (vehicle == null) {
             infoLabel.setText("Choose a vehicle you want to edit");
             return;
         }
@@ -136,14 +143,13 @@ public class EmployeeFileController implements Initializable {
             primaryStage.setResizable(false);
             primaryStage.show();
 
-            primaryStage.setOnHiding( event -> {
+            primaryStage.setOnHiding(event -> {
                 listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
                 FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
                 tableVehicles.setItems(filteredList);
                 searchBar.setOnKeyReleased(keyEvent ->
                 {
-                    switch (choiceBox.getValue())
-                    {
+                    switch (choiceBox.getValue()) {
                         case "Name":
                             filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
                             break;
@@ -168,44 +174,49 @@ public class EmployeeFileController implements Initializable {
     public void onDeleteVehicle(ActionEvent actionEvent) {
         infoLabel.setText("Deleting a vehicle");
         Vehicle vehicle = tableVehicles.getSelectionModel().getSelectedItem();
-        if(vehicle == null) {
+        if (vehicle == null) {
             infoLabel.setText("Choose a vehicle you want to delete");
             return;
         }
+        if (vehicle.getAvailable().equals("yes")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm");
+            alert.setHeaderText("Deleting a vehicle");
+            alert.setContentText("Are you sure you want to delete this vehicle?");
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm");
-        alert.setHeaderText("Deleting a vehicle");
-        alert.setContentText("Are you sure you want to delete this vehicle?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            rentacarDAOdb.removeVehicle(vehicle);
-            listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
-            FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
-            tableVehicles.setItems(filteredList);
-            searchBar.setOnKeyReleased(keyEvent ->
-            {
-                switch (choiceBox.getValue())
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                rentacarDAOdb.removeVehicle(vehicle);
+                listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+                FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
+                tableVehicles.setItems(filteredList);
+                searchBar.setOnKeyReleased(keyEvent ->
                 {
-                    case "Name":
-                        filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
-                        break;
-                    case "Brand":
-                        filteredList.setPredicate(p -> p.getBrand().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
-                        break;
-                    case "Available":
-                        filteredList.setPredicate(p -> p.getAvailable().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
-                        break;
-                    case "Price":
-                        filteredList.setPredicate(p -> String.valueOf(p.getPrice()).toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
-                        break;
-                }
-            });
-            infoLabel.setText("Vehicle deleted");
-        }
-        else if(result.get() == ButtonType.CANCEL){
-            infoLabel.setText("Vehicle not deleted");
+                    switch (choiceBox.getValue()) {
+                        case "Name":
+                            filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                            break;
+                        case "Brand":
+                            filteredList.setPredicate(p -> p.getBrand().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                            break;
+                        case "Available":
+                            filteredList.setPredicate(p -> p.getAvailable().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                            break;
+                        case "Price":
+                            filteredList.setPredicate(p -> String.valueOf(p.getPrice()).toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                            break;
+                    }
+                });
+                infoLabel.setText("Vehicle deleted");
+            } else if (result.get() == ButtonType.CANCEL) {
+                infoLabel.setText("Vehicle not deleted");
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Oops...");
+            alert.setContentText("You can't delete a vehicle that is rented...");
+            alert.show();
         }
     }
 
@@ -230,8 +241,7 @@ public class EmployeeFileController implements Initializable {
 
         searchBar.setOnKeyReleased(keyEvent ->
         {
-            switch (choiceBox.getValue())
-            {
+            switch (choiceBox.getValue()) {
                 case "Name":
                     filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
                     break;
@@ -246,12 +256,67 @@ public class EmployeeFileController implements Initializable {
                     break;
             }
         });
+
+        FilteredList<Reservation> filteredList2 = new FilteredList(listOfReservations, p -> true);
+        tableReservations.setItems(filteredList2);
+
+        personColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPerson().getFirstName() + " " + data.getValue().getPerson().getLastName()));
+        vehicleColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVehicle().getName() + " (" + data.getValue().getVehicle().getEngine() + ")"));
+        pickupDateColumn.setCellValueFactory(new PropertyValueFactory<>("pickupDate"));
+        returnDateColumn.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+        cardNumberColumn.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
+
+        searchBar2.setOnKeyReleased(keyEvent ->
+        {
+            switch (choiceBox2.getValue()) {
+                case "Pickup date":
+                    filteredList2.setPredicate(p -> p.getPickupDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                    break;
+                case "Return date":
+                    filteredList2.setPredicate(p -> p.getReturnDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                    break;
+            }
+        });
     }
 
     public void onEditReservation(ActionEvent actionEvent) {
     }
 
     public void onDeleteReservation(ActionEvent actionEvent) {
+        infoLabel2.setText("Deleting a reservation");
+        Reservation reservation = tableReservations.getSelectionModel().getSelectedItem();
+        if (reservation == null) {
+            infoLabel.setText("Choose a reservation you want to delete");
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Deleting a reservation");
+        alert.setContentText("Are you sure you want to delete this reservation?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            rentacarDAOdb.deleteReservation(reservation);
+            reservation.getVehicle().setAvailable("yes");
+            rentacarDAOdb.updateVehicle(reservation.getVehicle());
+            listOfReservations = FXCollections.observableArrayList(rentacarDAOdb.reservations());
+            FilteredList<Reservation> filteredList2 = new FilteredList(listOfReservations, p -> true);
+            tableReservations.setItems(filteredList2);
+            searchBar2.setOnKeyReleased(keyEvent ->
+            {
+                switch (choiceBox2.getValue()) {
+                    case "Pickup date":
+                        filteredList2.setPredicate(p -> p.getPickupDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                        break;
+                    case "Return date":
+                        filteredList2.setPredicate(p -> p.getReturnDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                        break;
+                }
+            });
+            infoLabel2.setText("Reservation deleted");
+        } else if (result.get() == ButtonType.CANCEL) {
+            infoLabel2.setText("Reservation not deleted");
+        }
     }
 
     public void onAdminCheckRes(ActionEvent actionEvent) {
@@ -260,11 +325,11 @@ public class EmployeeFileController implements Initializable {
     public void onAdminRent(ActionEvent actionEvent) {
         infoLabel.setText("Renting...");
         Vehicle vehicle = tableVehicles.getSelectionModel().getSelectedItem();
-        if(vehicle == null) {
+        if (vehicle == null) {
             infoLabel.setText("Choose a vehicle you want to rent");
             return;
         }
-        if(vehicle.getAvailable().equals("yes")) {
+        if (vehicle.getAvailable().equals("yes")) {
             Parent root = null;
             try {
                 Stage primaryStage = new Stage();
@@ -278,14 +343,13 @@ public class EmployeeFileController implements Initializable {
                 primaryStage.setResizable(false);
                 primaryStage.show();
 
-                primaryStage.setOnHiding( event -> {
+                primaryStage.setOnHiding(event -> {
                     listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
                     FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
                     tableVehicles.setItems(filteredList);
                     searchBar.setOnKeyReleased(keyEvent ->
                     {
-                        switch (choiceBox.getValue())
-                        {
+                        switch (choiceBox.getValue()) {
                             case "Name":
                                 filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
                                 break;
@@ -305,8 +369,7 @@ public class EmployeeFileController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("We are sorry...");

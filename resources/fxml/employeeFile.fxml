@@ -77,8 +77,11 @@
                   <children>
                       <TableView fx:id="tableReservations" layoutY="72.0" prefHeight="216.0" prefWidth="600.0">
                           <columns>
-                              <TableColumn fx:id="c1" prefWidth="68.0" text="Name" />
-                              <TableColumn fx:id="c2" prefWidth="68.0" text="Name" />
+                              <TableColumn fx:id="personColumn" prefWidth="121.0" text="Person" />
+                              <TableColumn fx:id="vehicleColumn" prefWidth="103.0" text="Vehicle" />
+                              <TableColumn fx:id="pickupDateColumn" prefWidth="113.0" text="Pickup date" />
+                              <TableColumn fx:id="returnDateColumn" prefWidth="115.0" text="Return date" />
+                              <TableColumn fx:id="cardNumberColumn" prefWidth="147.0" text="Card number" />
                           </columns>
                       </TableView>
                       <ChoiceBox fx:id="choiceBox2" layoutX="14.0" layoutY="36.0" prefHeight="27.0" prefWidth="120.0">
