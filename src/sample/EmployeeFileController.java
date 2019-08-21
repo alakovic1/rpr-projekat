@@ -174,9 +174,9 @@ public class EmployeeFileController implements Initializable {
         }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Potvrda brisanja");
-        alert.setHeaderText("Brisanje vozila ");
-        alert.setContentText("Da li ste sigurni da želite obrisati vozilo?");
+        alert.setTitle("Confirm");
+        alert.setHeaderText("Deleting a vehicle");
+        alert.setContentText("Are you sure you want to delete this vehicle?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
@@ -258,5 +258,60 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onAdminRent(ActionEvent actionEvent) {
+        infoLabel.setText("Renting...");
+        Vehicle vehicle = tableVehicles.getSelectionModel().getSelectedItem();
+        if(vehicle == null) {
+            infoLabel.setText("Choose a vehicle you want to rent");
+            return;
+        }
+        if(vehicle.getAvailable().equals("yes")) {
+            Parent root = null;
+            try {
+                Stage primaryStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminRentFile.fxml"));
+                AdminRentFileController controller = new AdminRentFileController(vehicle);
+                loader.setController(controller);
+                root = loader.load();
+                primaryStage.setTitle("Rent");
+                primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+                primaryStage.initModality(Modality.APPLICATION_MODAL);
+                primaryStage.setResizable(false);
+                primaryStage.show();
+
+                primaryStage.setOnHiding( event -> {
+                    listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+                    FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
+                    tableVehicles.setItems(filteredList);
+                    searchBar.setOnKeyReleased(keyEvent ->
+                    {
+                        switch (choiceBox.getValue())
+                        {
+                            case "Name":
+                                filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                                break;
+                            case "Brand":
+                                filteredList.setPredicate(p -> p.getBrand().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                                break;
+                            case "Available":
+                                filteredList.setPredicate(p -> p.getAvailable().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                                break;
+                            case "Price":
+                                filteredList.setPredicate(p -> String.valueOf(p.getPrice()).toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                                break;
+                        }
+                    });
+                    infoLabel.setText("Renting finished...");
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("We are sorry...");
+            alert.setContentText("This car isn't available for rent now");
+            alert.show();
+        }
     }
 }

@@ -10,7 +10,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit, getPersonUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -53,6 +53,7 @@ public class RentACarDAODatabase {
             removeVehicleUpit = connection.prepareStatement("DELETE FROM vehicle WHERE id=?");
             newVehicleID = connection.prepareStatement("SELECT MAX(id)+1 FROM vehicle");
             addVehicleUpit = connection.prepareStatement("INSERT INTO vehicle VALUES(?,?,?,?,?,?,?,?,?)");
+            getPersonUpit = connection.prepareStatement("SELECT * FROM person WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -221,6 +222,58 @@ public class RentACarDAODatabase {
             addVehicleUpit.setInt(9,vehicle.getPrice());
 
             addVehicleUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Person addPersonIfDoesntExist(Person person) {
+        try {
+            getPersonUpit.setInt(1, person.getId());
+            ResultSet rs = getPersonUpit.executeQuery();
+            if (!rs.next()) {
+                int noviId = 1;
+                ResultSet rs2 = newPersonID.executeQuery();
+                if (rs2.next()) noviId = rs2.getInt(1);
+
+                addPersonUpit.setInt(1,noviId);
+                addPersonUpit.setString(2,person.getFirstName());
+                addPersonUpit.setString(3,person.getLastName());
+                addPersonUpit.setString(4,person.getUsername());
+                addPersonUpit.setString(5,person.getAdress());
+                addPersonUpit.setString(6,person.getEmail());
+                addPersonUpit.setString(7,person.getPassword());
+
+                addPersonUpit.executeUpdate();
+                person.setId(noviId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
+    }
+
+    public void addReservation2(Reservation reservation){
+        try {
+            reservation.setPerson(addPersonIfDoesntExist(reservation.getPerson()));
+            reservation.setVehicle(findVehicle(reservation.getVehicle()));
+
+            ResultSet rs = newReservationID.executeQuery();
+            int id = 1;
+            if(rs.next()) id = rs.getInt(1);
+
+            addReservationUpit.setInt(1,id);
+            addReservationUpit.setInt(2,reservation.getPerson().getId());
+            addReservationUpit.setInt(3,reservation.getVehicle().getId());
+            addReservationUpit.setString(4, reservation.getPickupDate());
+            addReservationUpit.setString(5, reservation.getReturnDate());
+            addReservationUpit.setString(6,reservation.getCardNumber());
+            addReservationUpit.setString(7,reservation.getExpirationDate());
+            addReservationUpit.setInt(8,reservation.getSecurityCode());
+            addReservationUpit.setString(9,reservation.getFirstName());
+            addReservationUpit.setString(10,reservation.getLastName());
+
+            addReservationUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

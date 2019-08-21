@@ -64,6 +64,7 @@ public class RentFileController implements Initializable {
     }
 
     private boolean areDatesOkay(){
+        if(pickupDate.getEditor().getText().length() == 0 || returnDate.getEditor().getText().length() == 0) return false;
         if(pickupDate.getValue().isAfter(returnDate.getValue())) return false;
         return true;
     }
