@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="559.0" prefWidth="363.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="22.0" layoutY="198.0" prefHeight="38.0" prefWidth="143.0" text="First and Last name" />
+      <TextField fx:id="firstAndLastName" editable="false" layoutX="175.0" layoutY="204.0" />
+      <TextField fx:id="email" editable="false" layoutX="175.0" layoutY="242.0" />
+      <Label alignment="CENTER" layoutX="64.0" layoutY="236.0" prefHeight="38.0" prefWidth="59.0" text="Email" />
+      <Label alignment="CENTER" layoutX="132.0" layoutY="168.0" prefHeight="27.0" prefWidth="68.0" text="Person">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Separator layoutX="23.0" layoutY="162.0" prefHeight="6.0" prefWidth="329.0" />
+      <Label alignment="CENTER" layoutX="136.0" layoutY="1.0" prefHeight="27.0" prefWidth="59.0" text="Vehicle">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="15.0" layoutY="30.0" prefHeight="38.0" prefWidth="143.0" text="Name / Brand / Model" />
+      <TextField fx:id="vehicleNBM" editable="false" layoutX="174.0" layoutY="35.0" prefHeight="27.0" prefWidth="181.0" />
+      <Label alignment="CENTER" layoutX="3.0" layoutY="69.0" prefHeight="38.0" prefWidth="167.0" text="Number of doors / seats" />
+      <TextField fx:id="numberDS" editable="false" layoutX="174.0" layoutY="75.0" prefHeight="27.0" prefWidth="181.0" />
+      <Label alignment="CENTER" layoutX="26.0" layoutY="116.0" prefHeight="27.0" prefWidth="59.0" text="Engine" />
+      <TextField fx:id="engine" editable="false" layoutX="93.0" layoutY="116.0" prefHeight="27.0" prefWidth="94.0" />
+      <TextField fx:id="price" editable="false" layoutX="253.0" layoutY="116.0" prefHeight="27.0" prefWidth="101.0" />
+      <Label alignment="CENTER" layoutX="199.0" layoutY="116.0" prefHeight="27.0" prefWidth="59.0" text="Price" />
+      <Label alignment="CENTER" layoutX="7.0" layoutY="297.0" prefHeight="38.0" prefWidth="152.0" text="Pickup / Return date" />
+      <TextField fx:id="PRDate" editable="false" layoutX="152.0" layoutY="302.0" prefHeight="27.0" prefWidth="190.0" />
+      <TextField fx:id="cardNmb" alignment="CENTER" editable="false" layoutX="124.0" layoutY="385.0" prefHeight="27.0" prefWidth="220.0" />
+      <Label alignment="CENTER" layoutX="128.0" layoutY="347.0" prefHeight="27.0" prefWidth="94.0" text="Card information">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="26.0" layoutY="385.0" prefHeight="27.0" prefWidth="94.0" text="Card number" />
+      <Separator layoutX="23.0" layoutY="280.0" prefHeight="6.0" prefWidth="329.0" />
+      <Separator layoutX="23.0" layoutY="341.0" prefHeight="6.0" prefWidth="329.0" />
+      <Label alignment="CENTER" layoutX="15.0" layoutY="427.0" prefHeight="27.0" prefWidth="68.0" text="Exp date" />
+      <TextField fx:id="expDate" editable="false" layoutX="86.0" layoutY="427.0" prefHeight="27.0" prefWidth="68.0" />
+      <TextField fx:id="secCode" editable="false" layoutX="265.0" layoutY="427.0" prefHeight="27.0" prefWidth="79.0" />
+      <Label alignment="CENTER" layoutX="170.0" layoutY="427.0" prefHeight="27.0" prefWidth="94.0" text="Security code" />
+      <Label alignment="CENTER" layoutX="46.0" layoutY="471.0" prefHeight="27.0" prefWidth="79.0" text="First name" />
+      <Label alignment="CENTER" layoutX="47.0" layoutY="510.0" prefHeight="27.0" prefWidth="79.0" text="Last name" />
+      <TextField fx:id="firstNameCard" editable="false" layoutX="145.0" layoutY="471.0" />
+      <TextField fx:id="lastNameCard" editable="false" layoutX="145.0" layoutY="510.0" />
+   </children>
+</AnchorPane>

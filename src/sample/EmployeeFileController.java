@@ -286,7 +286,7 @@ public class EmployeeFileController implements Initializable {
         infoLabel2.setText("Deleting a reservation");
         Reservation reservation = tableReservations.getSelectionModel().getSelectedItem();
         if (reservation == null) {
-            infoLabel.setText("Choose a reservation you want to delete");
+            infoLabel2.setText("Choose a reservation you want to delete");
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -341,6 +341,27 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onAdminCheckRes(ActionEvent actionEvent) {
+        infoLabel2.setText("Checking a reservation");
+        Reservation reservation = tableReservations.getSelectionModel().getSelectedItem();
+        if (reservation == null) {
+            infoLabel2.setText("Choose a reservation you want to check");
+            return;
+        }
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/checkReservationFile.fxml"));
+            CheckReservationFileController controller = new CheckReservationFileController(reservation);
+            loader.setController(controller);
+            root = loader.load();
+            primaryStage.setTitle("Reservation");
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onAdminRent(ActionEvent actionEvent) {
