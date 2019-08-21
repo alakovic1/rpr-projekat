@@ -314,6 +314,27 @@ public class EmployeeFileController implements Initializable {
                 }
             });
             infoLabel2.setText("Reservation deleted");
+
+            listOfVehicles = FXCollections.observableArrayList(rentacarDAOdb.vehicles());
+            FilteredList<Vehicle> filteredList = new FilteredList(listOfVehicles, p -> true);
+            tableVehicles.setItems(filteredList);
+            searchBar.setOnKeyReleased(keyEvent ->
+            {
+                switch (choiceBox.getValue()) {
+                    case "Name":
+                        filteredList.setPredicate(p -> p.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                        break;
+                    case "Brand":
+                        filteredList.setPredicate(p -> p.getBrand().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                        break;
+                    case "Available":
+                        filteredList.setPredicate(p -> p.getAvailable().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                        break;
+                    case "Price":
+                        filteredList.setPredicate(p -> String.valueOf(p.getPrice()).toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
+                        break;
+                }
+            });
         } else if (result.get() == ButtonType.CANCEL) {
             infoLabel2.setText("Reservation not deleted");
         }
@@ -365,6 +386,21 @@ public class EmployeeFileController implements Initializable {
                         }
                     });
                     infoLabel.setText("Renting finished...");
+
+                    listOfReservations = FXCollections.observableArrayList(rentacarDAOdb.reservations());
+                    FilteredList<Reservation> filteredList2 = new FilteredList(listOfReservations, p -> true);
+                    tableReservations.setItems(filteredList2);
+                    searchBar2.setOnKeyReleased(keyEvent ->
+                    {
+                        switch (choiceBox2.getValue()) {
+                            case "Pickup date":
+                                filteredList2.setPredicate(p -> p.getPickupDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                                break;
+                            case "Return date":
+                                filteredList2.setPredicate(p -> p.getReturnDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                                break;
+                        }
+                    });
                 });
             } catch (IOException e) {
                 e.printStackTrace();
