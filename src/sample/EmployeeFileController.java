@@ -280,6 +280,45 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onEditReservation(ActionEvent actionEvent) {
+        Reservation reservation = tableReservations.getSelectionModel().getSelectedItem();
+        if (reservation == null) {
+            infoLabel2.setText("Choose a reservation you want to edit");
+            return;
+        }
+        infoLabel.setText("Editing reservation");
+        Parent root = null;
+        try {
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editReservationFile.fxml"));
+            EditReservationFileController controller = new EditReservationFileController(reservation);
+            loader.setController(controller);
+            root = loader.load();
+            primaryStage.setTitle("Edit reservation");
+            primaryStage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+
+            primaryStage.setOnHiding(event -> {
+                listOfReservations = FXCollections.observableArrayList(rentacarDAOdb.reservations());
+                FilteredList<Reservation> filteredList2 = new FilteredList(listOfReservations, p -> true);
+                tableReservations.setItems(filteredList2);
+                searchBar2.setOnKeyReleased(keyEvent ->
+                {
+                    switch (choiceBox2.getValue()) {
+                        case "Pickup date":
+                            filteredList2.setPredicate(p -> p.getPickupDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                            break;
+                        case "Return date":
+                            filteredList2.setPredicate(p -> p.getReturnDate().toLowerCase().contains(searchBar2.getText().toLowerCase().trim()));
+                            break;
+                    }
+                });
+                infoLabel2.setText("Reservation edited");
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onDeleteReservation(ActionEvent actionEvent) {

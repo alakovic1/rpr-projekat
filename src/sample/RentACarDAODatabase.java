@@ -13,7 +13,7 @@ public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
     public Connection connection;
 
-    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit, getPersonUpit, getReservationsUpit, deleteReservationUpit;
+    private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit, getPersonUpit, getReservationsUpit, deleteReservationUpit, updateReservationUpit;
 
     public static void initialize() {
         instance = new RentACarDAODatabase();
@@ -59,6 +59,7 @@ public class RentACarDAODatabase {
             getPersonUpit = connection.prepareStatement("SELECT * FROM person WHERE id=?");
             getReservationsUpit = connection.prepareStatement("SELECT * FROM reservation");
             deleteReservationUpit = connection.prepareStatement("DELETE FROM reservation WHERE id=?");
+            updateReservationUpit = connection.prepareStatement("UPDATE reservation SET personID=?, vehicleID=?, pickupDate=?, returnDate=?, cardNumber=?, expirationDate=?, securityCode=?, firstName=?, lastName=? WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -284,7 +285,7 @@ public class RentACarDAODatabase {
         }
     }
 
-    public ArrayList<Reservation>  reservations() {
+    public ArrayList<Reservation> reservations() {
         ArrayList<Reservation> reservations = new ArrayList<>();
         try {
             ResultSet rs = getReservationsUpit.executeQuery();
@@ -317,5 +318,24 @@ public class RentACarDAODatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateReservation(Reservation reservation) {
+        try {
+            updateReservationUpit.setInt(10, reservation.getId());
+            updateReservationUpit.setInt(1,reservation.getPerson().getId());
+            updateReservationUpit.setInt(2,reservation.getVehicle().getId());
+            updateReservationUpit.setString(3, reservation.getPickupDate());
+            updateReservationUpit.setString(4, reservation.getReturnDate());
+            updateReservationUpit.setString(5,reservation.getCardNumber());
+            updateReservationUpit.setString(6,reservation.getExpirationDate());
+            updateReservationUpit.setInt(7,reservation.getSecurityCode());
+            updateReservationUpit.setString(8,reservation.getFirstName());
+            updateReservationUpit.setString(9,reservation.getLastName());
+            updateReservationUpit.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
