@@ -66,6 +66,7 @@ class LoginnRegisterControllerTest {
         TextField password1 = robot.lookup("#passwordLogin").queryAs(TextField.class);
         robot.clickOn("#passwordLogin");
         robot.press(KeyCode.COMMAND).press(KeyCode.A).release(KeyCode.A).release(KeyCode.COMMAND);
+        robot.press(KeyCode.CONTROL).press(KeyCode.A).release(KeyCode.A).release(KeyCode.CONTROL);
         robot.press(KeyCode.DELETE).release(KeyCode.DELETE);
         Background bg1 = password1.getBackground();
         boolean colorFound1 = false;
@@ -127,6 +128,7 @@ class LoginnRegisterControllerTest {
 
         robot.clickOn("#email");
         robot.press(KeyCode.COMMAND).press(KeyCode.A).release(KeyCode.A).release(KeyCode.COMMAND);
+        robot.press(KeyCode.CONTROL).press(KeyCode.A).release(KeyCode.A).release(KeyCode.CONTROL);
         robot.press(KeyCode.DELETE).release(KeyCode.DELETE);
         robot.write("alakovic1@etf.unsa.ba");
     }

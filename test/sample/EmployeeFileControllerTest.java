@@ -128,6 +128,7 @@ class EmployeeFileControllerTest {
         robot.write("12");
 
         robot.press(KeyCode.COMMAND).press(KeyCode.A).release(KeyCode.A).release(KeyCode.COMMAND);
+        robot.press(KeyCode.CONTROL).press(KeyCode.A).release(KeyCode.A).release(KeyCode.CONTROL);
         robot.press(KeyCode.DELETE).release(KeyCode.DELETE);
 
         robot.clickOn("#choiceBox2");
