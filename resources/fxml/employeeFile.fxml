@@ -27,7 +27,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableVehicles" layoutY="72.0" prefHeight="216.0" prefWidth="600.0">
+                        <TableView fx:id="tableVehicles" layoutY="72.0" prefHeight="200.0" prefWidth="600.0">
                             <columns>
                                 <TableColumn fx:id="columnName" prefWidth="68.0" text="Name" />
                                 <TableColumn fx:id="columnBrand" prefWidth="69.0" text="Brand" />
@@ -55,7 +55,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="searchBar" layoutX="119.0" layoutY="36.0" prefHeight="27.0" prefWidth="114.0" promptText="Search" />
-                        <Label fx:id="infoLabel" alignment="CENTER" layoutX="2.0" layoutY="287.0" prefHeight="30.0" prefWidth="600.0">
+                        <Label fx:id="infoLabel" alignment="CENTER" layoutX="2.0" layoutY="268.0" prefHeight="49.0" prefWidth="482.0">
                            <font>
                               <Font size="11.0" />
                            </font></Label>
@@ -68,6 +68,7 @@
                                 <Font name="Charter Roman" size="13.0" />
                             </font>
                         </Button>
+                        <Button fx:id="vehiclesPDF" layoutX="486.0" layoutY="279.0" mnemonicParsing="false" onAction="#onVehiclesinPDF" prefHeight="27.0" prefWidth="103.0" text="Show in PDF" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -75,7 +76,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                      <TableView fx:id="tableReservations" layoutY="72.0" prefHeight="216.0" prefWidth="600.0">
+                      <TableView fx:id="tableReservations" layoutY="72.0" prefHeight="200.0" prefWidth="600.0">
                           <columns>
                               <TableColumn fx:id="personColumn" prefWidth="121.0" text="Person" />
                               <TableColumn fx:id="vehicleColumn" prefWidth="103.0" text="Vehicle" />
@@ -98,7 +99,7 @@
                           </font>
                       </Label>
                       <TextField fx:id="searchBar2" layoutX="139.0" layoutY="36.0" prefHeight="27.0" prefWidth="120.0" promptText="Search" />
-                      <Label fx:id="infoLabel2" alignment="CENTER" layoutX="2.0" layoutY="287.0" prefHeight="30.0" prefWidth="600.0">
+                      <Label fx:id="infoLabel2" alignment="CENTER" layoutX="2.0" layoutY="271.0" prefHeight="46.0" prefWidth="475.0">
                           <font>
                               <Font size="11.0" />
                           </font></Label>
@@ -110,6 +111,7 @@
                               <Font name="Charter Roman" size="13.0" />
                            </font>
                         </Button>
+                        <Button fx:id="reservationsPDF" layoutX="487.0" layoutY="281.0" mnemonicParsing="false" onAction="#onReservationsinPDF" prefHeight="27.0" prefWidth="103.0" text="Show in PDF" />
                   </children></AnchorPane>
             </content>
           </Tab>

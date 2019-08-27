@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +53,8 @@ public class EmployeeFileController implements Initializable {
     public TableColumn<Reservation, String> pickupDateColumn;
     public TableColumn<Reservation, String> returnDateColumn;
     public TableColumn<Reservation, String> cardNumberColumn;
+    public Button vehiclesPDF;
+    public Button reservationsPDF;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -471,6 +474,19 @@ public class EmployeeFileController implements Initializable {
             alert.setHeaderText("We are sorry...");
             alert.setContentText("This car isn't available for rent now");
             alert.show();
+        }
+    }
+
+    public void onReservationsinPDF(ActionEvent actionEvent) {
+    }
+
+    public void onVehiclesinPDF(ActionEvent actionEvent) {
+        rentacarDAOdb = RentACarDAODatabase.getInstance();
+        Reports report = new Reports();
+        try {
+            report.showVehicleReport(RentACarDAODatabase.getConnection());
+        } catch (JRException e) {
+            e.printStackTrace();
         }
     }
 }

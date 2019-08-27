@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class RentACarDAODatabase {
     public static RentACarDAODatabase instance = null;
-    public Connection connection;
+    public static Connection connection;
 
     private PreparedStatement isValidDB, getPersonsUpit, addPersonUpit, newPersonID, getVehiclesUpit, addReservationUpit, newReservationID, getPersonResUpit, getVehicleResUpit, updateVehicleUpit, removeVehicleUpit, newVehicleID, addVehicleUpit, getPersonUpit, getReservationsUpit, deleteReservationUpit, updateReservationUpit;
 
@@ -63,6 +63,10 @@ public class RentACarDAODatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 
     private void openDBAgain() {
