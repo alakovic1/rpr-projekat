@@ -478,6 +478,13 @@ public class EmployeeFileController implements Initializable {
     }
 
     public void onReservationsinPDF(ActionEvent actionEvent) {
+        rentacarDAOdb = RentACarDAODatabase.getInstance();
+        Reports report = new Reports();
+        try {
+            report.showReservationsReport(RentACarDAODatabase.getConnection());
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onVehiclesinPDF(ActionEvent actionEvent) {

@@ -28,4 +28,22 @@ public class Reports extends JFrame {
         this.setVisible(true);
     }
 
+    public void showReservationsReport(Connection conn) throws JRException {
+        String reportSrcFile = getClass().getResource("/reports/Reservations.jrxml").getFile();
+        String reportsDir = getClass().getResource("/reports/").getFile();
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("reportsDirPath", reportsDir);
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        list.add(parameters);
+        JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, conn);
+        JRViewer viewer = new JRViewer(print);
+        viewer.setOpaque(true);
+        viewer.setVisible(true);
+        this.add(viewer);
+        this.setSize(1300, 700);
+        this.setVisible(true);
+    }
+
 }
