@@ -7,82 +7,31 @@ import static org.junit.jupiter.api.Assertions.*;
 class ReservationTest {
 
     @Test
-    void getId() {
-    }
-
-    @Test
-    void setId() {
-    }
-
-    @Test
     void getPerson() {
-    }
-
-    @Test
-    void setPerson() {
-    }
-
-    @Test
-    void getVehicle() {
-    }
-
-    @Test
-    void setVehicle() {
+        Person person = new Person("firstName", "lastName", "username", "adress", "email@etf.unsa.ba", "password");
+        Vehicle vehicle = new Vehicle("name", "brand", "model", 5, 5, "benzin", "yes", 50);
+        Reservation reservation = new Reservation(person, vehicle, "12. 09. 2019", "30. 09. 2019", "1234123412341234", "05/21", 123, "firstName", "lastName");
+        assertEquals("firstName", reservation.getPerson().getFirstName());
     }
 
     @Test
     void getPickupDate() {
-    }
-
-    @Test
-    void setPickupDate() {
-    }
-
-    @Test
-    void getReturnDate() {
+        Reservation reservation = new Reservation(new Person(), new Vehicle(), "12. 09. 2019", "30. 09. 2019", "1234123412341234", "05/21", 123, "firstName", "lastName");
+        assertEquals("12. 09. 2019", reservation.getPickupDate());
     }
 
     @Test
     void setReturnDate() {
-    }
-
-    @Test
-    void getCardNumber() {
+        Reservation reservation = new Reservation(new Person(), new Vehicle(), "12. 09. 2019", "30. 09. 2019", "1234123412341234", "05/21", 123, "firstName", "lastName");
+        reservation.setReturnDate("01. 10. 2019");
+        assertEquals("01. 10. 2019", reservation.getReturnDate());
     }
 
     @Test
     void setCardNumber() {
+        Reservation reservation = new Reservation(new Person(), new Vehicle(), "12. 09. 2019", "30. 09. 2019", "1234123412341234", "05/21", 123, "firstName", "lastName");
+        reservation.setCardNumber("4321432143214321");
+        assertEquals("4321432143214321", reservation.getCardNumber());
     }
 
-    @Test
-    void getExpirationDate() {
-    }
-
-    @Test
-    void setExpirationDate() {
-    }
-
-    @Test
-    void getSecurityCode() {
-    }
-
-    @Test
-    void setSecurityCode() {
-    }
-
-    @Test
-    void getFirstName() {
-    }
-
-    @Test
-    void setFirstName() {
-    }
-
-    @Test
-    void getLastName() {
-    }
-
-    @Test
-    void setLastName() {
-    }
 }
