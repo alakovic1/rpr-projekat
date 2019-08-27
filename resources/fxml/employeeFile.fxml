@@ -23,7 +23,7 @@
       <Button fx:id="logoutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="23.0" prefWidth="70.0" text="Logout" />
       <TabPane fx:id="tabPane" layoutY="52.0" prefHeight="348.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Vehicles">
+          <Tab fx:id="vehiclesTab" text="Vehicles">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -72,7 +72,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="Reservations">
+          <Tab fx:id="reservationsTab" text="Reservations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>

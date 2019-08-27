@@ -55,6 +55,8 @@ public class EmployeeFileController implements Initializable {
     public TableColumn<Reservation, String> cardNumberColumn;
     public Button vehiclesPDF;
     public Button reservationsPDF;
+    public Tab vehiclesTab;
+    public Tab reservationsTab;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
