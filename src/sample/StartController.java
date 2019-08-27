@@ -20,6 +20,7 @@ public class StartController {
         stage = (Stage) registernlogin.getScene().getWindow();
         Parent root = null;
         try {
+            stage.close();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginnregister.fxml"));
             root = loader.load();

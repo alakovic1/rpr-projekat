@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -31,6 +32,8 @@ public class LoginnRegisterController {
     public TextField adress;
     public TextField email;
     public TextField password;
+    public Button loginBttn;
+    public Button registerBttn;
 
     private boolean usernameLoginIsValid = false;
     private boolean passwordLoginIsValid = false;
@@ -256,7 +259,7 @@ public class LoginnRegisterController {
                 try {
                     Stage stage = (Stage) usernameLogin.getScene().getWindow();
                     stage.close();
-                    StartController.stage.close();
+                    //StartController.stage.close();
                     Stage primaryStage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
                     ClientFileController controller = new ClientFileController(newPerson);
@@ -327,7 +330,7 @@ public class LoginnRegisterController {
                         try {
                             Stage stage = (Stage) usernameLogin.getScene().getWindow();
                             stage.close();
-                            StartController.stage.close();
+                            //StartController.stage.close();
                             Stage primaryStage = new Stage();
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientFile.fxml"));
                             ClientFileController controller = new ClientFileController(currentPerson);
