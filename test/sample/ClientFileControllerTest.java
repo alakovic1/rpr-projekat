@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 class ClientFileControllerTest {
+    Stage theStage;
 
     @Start
     public void start(Stage stage) throws Exception{
@@ -37,11 +38,12 @@ class ClientFileControllerTest {
         stage.setResizable(false);
         stage.show();
         stage.toFront();
+
+        theStage = stage;
     }
 
     @Test
     public void testRentingVehicle1(FxRobot robot){
-/*
         //search the vehicle by price
         robot.clickOn("#boxFilter");
         robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
@@ -50,14 +52,13 @@ class ClientFileControllerTest {
         robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
 
         robot.clickOn("#searchBar");
-        robot.write("12");
+        robot.write("200");
 
         //choose a vehicle
         robot.clickOn("#tableofVehiclesClient");
         robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
         robot.press(KeyCode.UP).release(KeyCode.UP);
-        robot.clickOn("#tableofVehiclesClient");
-        robot.clickOn("#rentBtn");
+        /*robot.clickOn("#rentBtn");
 
         //fill dates
         robot.clickOn("#pickupDate");
@@ -90,5 +91,17 @@ class ClientFileControllerTest {
         DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
         Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
         robot.clickOn(okButton);*/
+    }
+
+    @Test
+    public void MoreInformationTest(FxRobot robot){
+        robot.clickOn("#tableofVehiclesClient");
+        robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+        robot.press(KeyCode.UP).release(KeyCode.UP);
+
+        robot.clickOn("#infoBtn");
+        robot.clickOn("#cancelBtn");
+
+        assertFalse(theStage.isShowing());
     }
 }
