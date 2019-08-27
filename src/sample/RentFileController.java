@@ -181,7 +181,7 @@ public class RentFileController implements Initializable {
                             LocalDate parsedDate = LocalDate.parse(text, formatters);
                             String text2 = returnDate.getValue().format(formatters);
                             LocalDate parsedDate2 = LocalDate.parse(text2, formatters);
-                            rentacarDAOdb.addReservation(new Reservation(person, vehicle, parsedDate.format(formatters), parsedDate2.format(formatters)));
+                            rentacarDAOdb.addReservation2(new Reservation(person, vehicle, parsedDate.format(formatters), parsedDate2.format(formatters)));
                             Stage stage = (Stage) vehicleInfoField.getScene().getWindow();
                             stage.close();
                             Parent root = null;

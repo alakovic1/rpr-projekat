@@ -197,7 +197,7 @@ public class CardInfoFileController implements Initializable {
             LocalDate parsedDate = LocalDate.parse(text, formatters);
             String text2 = returnDate.format(formatters);
             LocalDate parsedDate2 = LocalDate.parse(text2, formatters);
-            rentacarDAOdb.addReservation(new Reservation(person, vehicle, parsedDate.format(formatters), parsedDate2.format(formatters), cardNmb.getText(), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
+            rentacarDAOdb.addReservation2(new Reservation(person, vehicle, parsedDate.format(formatters), parsedDate2.format(formatters), cardNmb.getText(), expDate.getText(), Integer.parseInt(secCode.getText()), firstName.getText(), lastName.getText()));
             Parent root = null;
             try {
                 Stage stage = (Stage) fullPrice.getScene().getWindow();
