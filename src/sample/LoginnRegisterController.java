@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,6 +31,8 @@ public class LoginnRegisterController {
     public TextField password;
     public Button loginBttn;
     public Button registerBttn;
+    public Tab loginTab;
+    public Tab registerTab;
 
     private boolean usernameLoginIsValid = false;
     private boolean passwordLoginIsValid = false;
@@ -249,12 +248,9 @@ public class LoginnRegisterController {
 
     public void onRegister(ActionEvent actionEvent) {
         if (isValidForm()) {
-            if (usernameDoesExist()) {
+            //if (usernameDoesExist()) {
                 Person newPerson = new Person(firstName.getText(), lastName.getText(), username.getText(), adress.getText(), email.getText(), password.getText());
                 rentacarDAOdb.addPerson(newPerson);
-
-                //todo pregledati da li radi u isto vrijeme registracija pa poslije login bez ponovnog runa...
-
                 Parent root = null;
                 try {
                     Stage stage = (Stage) usernameLogin.getScene().getWindow();
@@ -273,14 +269,14 @@ public class LoginnRegisterController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
+            /*}
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setHeaderText("That username is alredy used by another user");
                 alert.setContentText("Please enter a new username");
                 alert.show();
-            }
+            }*/
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

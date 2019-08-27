@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
 <AnchorPane prefHeight="360.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginnRegisterController">
     <stylesheets>
         <URL value="@/css/design.css" />
@@ -20,7 +20,7 @@
    <children>
       <TabPane layoutX="-2.0" layoutY="-2.0" prefHeight="362.0" prefWidth="356.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Login">
+          <Tab fx:id="loginTab" text="Login">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="225.0" prefWidth="352.0">
                      <children>
@@ -52,7 +52,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="Register">
+          <Tab fx:id="registerTab" text="Register">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="361.0" prefWidth="381.0">
                      <children>
