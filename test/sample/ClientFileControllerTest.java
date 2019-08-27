@@ -43,7 +43,7 @@ class ClientFileControllerTest {
     }
 
     @Test
-    public void testRentingVehicle1(FxRobot robot){
+    public void SearchingVehiclesTest(FxRobot robot){
         //search the vehicle by price
         robot.clickOn("#boxFilter");
         robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
@@ -58,39 +58,8 @@ class ClientFileControllerTest {
         robot.clickOn("#tableofVehiclesClient");
         robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
         robot.press(KeyCode.UP).release(KeyCode.UP);
-        /*robot.clickOn("#rentBtn");
 
-        //fill dates
-        robot.clickOn("#pickupDate");
-        robot.write("09/03/19");
-
-        //see if dates are filled correctly
-        DatePicker pickupDate = robot.lookup("#pickupDate").queryAs(DatePicker.class);
-        Background bg = pickupDate.getEditor().getBackground();
-        boolean colorFound = false;
-        for (BackgroundFill bf : bg.getFills())
-            if (bf.getFill().toString().contains("64c288"))
-                colorFound = true;
-        assertTrue(colorFound);
-
-        robot.clickOn("#returnDate");
-        robot.write("10/10/19");
-
-        DatePicker returnDate = robot.lookup("#returnDate").queryAs(DatePicker.class);
-        Background bg2 = returnDate.getEditor().getBackground();
-        boolean colorFound2 = false;
-        for (BackgroundFill bf : bg2.getFills())
-            if (bf.getFill().toString().contains("64c288"))
-                colorFound2 = true;
-        assertTrue(colorFound2);
-
-        //press finish to see that the fields arent't filled correctly
-        robot.clickOn("#finishBtn");
-        robot.lookup(".dialog-pane").tryQuery().isPresent();
-
-        DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
-        Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
-        robot.clickOn(okButton);*/
+        assertTrue(theStage.isShowing());
     }
 
     @Test

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 class StartControllerTest {
+    Stage theStage;
 
     @Start
     public void start(Stage stage) throws Exception{
@@ -25,6 +26,8 @@ class StartControllerTest {
         stage.setScene(new Scene(root, PopupControl.USE_COMPUTED_SIZE, PopupControl.USE_COMPUTED_SIZE));
         stage.show();
         stage.toFront();
+
+        theStage = stage;
     }
 
     @Test
@@ -52,5 +55,7 @@ class StartControllerTest {
         robot.clickOn("#loginBttn");
 
         robot.clickOn("#logoutBtn");
+
+        assertFalse(theStage.isShowing());
     }
 }
