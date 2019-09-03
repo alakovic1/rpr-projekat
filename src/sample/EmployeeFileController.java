@@ -16,6 +16,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
+import java.beans.XMLEncoder;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -57,6 +60,7 @@ public class EmployeeFileController implements Initializable {
     public Button reservationsPDF;
     public Tab vehiclesTab;
     public Tab reservationsTab;
+    public Button XMLBttn;
 
     private RentACarDAODatabase rentacarDAOdb;
     private ObservableList<Vehicle> listOfVehicles;
@@ -495,6 +499,20 @@ public class EmployeeFileController implements Initializable {
         try {
             report.showVehicleReport(RentACarDAODatabase.getConnection());
         } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeinXML(ActionEvent actionEvent) {
+        RentACar rc = new RentACar();
+        rc.setVehicles(rentacarDAOdb.vehicles());
+        rc.setReservations(rentacarDAOdb.reservations());
+
+        try {
+            XMLEncoder encoder = new XMLEncoder(new FileOutputStream("rentacar.xml"));
+            encoder.writeObject(rc);
+            encoder.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="10.0.2" class="java.beans.XMLDecoder">
+ <object class="sample.RentACar" id="RentACar0">
+  <void property="reservations">
+   <void method="add">
+    <object class="sample.Reservation" id="Reservation0">
+     <void property="cardNumber">
+      <string>1234123412341234</string>
+     </void>
+     <void property="expirationDate">
+      <string>07/21</string>
+     </void>
+     <void property="firstName">
+      <string>Amila</string>
+     </void>
+     <void property="lastName">
+      <string>Lakovic</string>
+     </void>
+     <void property="person">
+      <void property="adress">
+       <string>adresa 13</string>
+      </void>
+      <void property="email">
+       <string>alakovic1@etf.unsa.ba</string>
+      </void>
+      <void property="firstName">
+       <string>Amila</string>
+      </void>
+      <void property="id">
+       <int>1</int>
+      </void>
+      <void property="lastName">
+       <string>Lakovic</string>
+      </void>
+      <void property="password">
+       <string>amila</string>
+      </void>
+      <void property="username">
+       <string>alakovic1</string>
+      </void>
+     </void>
+     <void property="pickupDate">
+      <string>17. 09. 2019</string>
+     </void>
+     <void property="returnDate">
+      <string>02. 10. 2019</string>
+     </void>
+     <void property="securityCode">
+      <int>1234</int>
+     </void>
+     <void property="vehicle">
+      <void property="available">
+       <string>no</string>
+      </void>
+      <void property="brand">
+       <string>BMW</string>
+      </void>
+      <void property="engine">
+       <string>Diesel</string>
+      </void>
+      <void property="id">
+       <int>20</int>
+      </void>
+      <void property="model">
+       <string>530d</string>
+      </void>
+      <void property="name">
+       <string>BMW 530d</string>
+      </void>
+      <void property="nmbDoors">
+       <int>5</int>
+      </void>
+      <void property="nmbSeats">
+       <int>5</int>
+      </void>
+      <void property="price">
+       <int>230</int>
+      </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Reservation" id="Reservation1">
+     <void property="cardNumber">
+      <string>8888888888888888</string>
+     </void>
+     <void property="expirationDate">
+      <string>08/23</string>
+     </void>
+     <void property="firstName">
+      <string>firstName</string>
+     </void>
+     <void property="id">
+      <int>1</int>
+     </void>
+     <void property="lastName">
+      <string>lastName</string>
+     </void>
+     <void property="person">
+      <void property="adress">
+       <string>asress</string>
+      </void>
+      <void property="email">
+       <string>email@etf.unsa.ba</string>
+      </void>
+      <void property="firstName">
+       <string>firstName</string>
+      </void>
+      <void property="id">
+       <int>3</int>
+      </void>
+      <void property="lastName">
+       <string>lastName</string>
+      </void>
+      <void property="password">
+       <string>password</string>
+      </void>
+      <void property="username">
+       <string>username</string>
+      </void>
+     </void>
+     <void property="pickupDate">
+      <string>22. 10. 2019</string>
+     </void>
+     <void property="returnDate">
+      <string>01. 11. 2019</string>
+     </void>
+     <void property="securityCode">
+      <int>8888</int>
+     </void>
+     <void property="vehicle">
+      <void property="available">
+       <string>no</string>
+      </void>
+      <void property="brand">
+       <string>VW</string>
+      </void>
+      <void property="engine">
+       <string>Diesel</string>
+      </void>
+      <void property="id">
+       <int>24</int>
+      </void>
+      <void property="model">
+       <string>MULTIVAN TDI</string>
+      </void>
+      <void property="name">
+       <string>VW MULTIVAN</string>
+      </void>
+      <void property="nmbDoors">
+       <int>5</int>
+      </void>
+      <void property="nmbSeats">
+       <int>9</int>
+      </void>
+      <void property="price">
+       <int>311</int>
+      </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Reservation" id="Reservation2">
+     <void property="cardNumber">
+      <null/>
+     </void>
+     <void property="expirationDate">
+      <null/>
+     </void>
+     <void property="firstName">
+      <null/>
+     </void>
+     <void property="id">
+      <int>2</int>
+     </void>
+     <void property="lastName">
+      <null/>
+     </void>
+     <void property="person">
+      <void property="adress">
+       <string>adress</string>
+      </void>
+      <void property="email">
+       <string>email@gmail.com</string>
+      </void>
+      <void property="firstName">
+       <string>1.Name</string>
+      </void>
+      <void property="id">
+       <int>5</int>
+      </void>
+      <void property="lastName">
+       <string>2.Name</string>
+      </void>
+      <void property="password">
+       <string>user</string>
+      </void>
+      <void property="username">
+       <string>user</string>
+      </void>
+     </void>
+     <void property="pickupDate">
+      <string>17. 12. 2019</string>
+     </void>
+     <void property="returnDate">
+      <string>11. 01. 2020</string>
+     </void>
+     <void property="vehicle">
+      <void property="available">
+       <string>no</string>
+      </void>
+      <void property="brand">
+       <string>RENAULT</string>
+      </void>
+      <void property="engine">
+       <string>Benzin</string>
+      </void>
+      <void property="id">
+       <int>16</int>
+      </void>
+      <void property="model">
+       <string>MEGANE 1.6</string>
+      </void>
+      <void property="name">
+       <string>RENAULT MEGANE</string>
+      </void>
+      <void property="nmbDoors">
+       <int>5</int>
+      </void>
+      <void property="nmbSeats">
+       <int>5</int>
+      </void>
+      <void property="price">
+       <int>90</int>
+      </void>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="vehicles">
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>PEUGEOT</string>
+     </void>
+     <void property="engine">
+      <string>Benzin</string>
+     </void>
+     <void property="id">
+      <int>8</int>
+     </void>
+     <void property="model">
+      <string>207</string>
+     </void>
+     <void property="name">
+      <string>PEUGEOT 207</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>70</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>NISSAN</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>9</int>
+     </void>
+     <void property="model">
+      <string>JUKE</string>
+     </void>
+     <void property="name">
+      <string>NISSAN JUKE</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>150</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>RENAULT</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>10</int>
+     </void>
+     <void property="model">
+      <string>CLIO 1.5 CRDi</string>
+     </void>
+     <void property="name">
+      <string>RENAULT CLIO</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>65</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>CITROEN</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>11</int>
+     </void>
+     <void property="model">
+      <string>C3 1.4</string>
+     </void>
+     <void property="name">
+      <string>CITROEN C3</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>50</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>POLO</string>
+     </void>
+     <void property="engine">
+      <string>Benzin</string>
+     </void>
+     <void property="id">
+      <int>12</int>
+     </void>
+     <void property="model">
+      <string>1.4</string>
+     </void>
+     <void property="name">
+      <string>POLO</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>80</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>SKODA</string>
+     </void>
+     <void property="engine">
+      <string>Benzin</string>
+     </void>
+     <void property="id">
+      <int>13</int>
+     </void>
+     <void property="model">
+      <string>1.2 HTP</string>
+     </void>
+     <void property="name">
+      <string>SKODA FABIA</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>70</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>AUDI</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>14</int>
+     </void>
+     <void property="model">
+      <string>A3 1.9 TDI</string>
+     </void>
+     <void property="name">
+      <string>AUDI A3</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>109</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>HYUNDAI</string>
+     </void>
+     <void property="engine">
+      <string>Benzin</string>
+     </void>
+     <void property="id">
+      <int>15</int>
+     </void>
+     <void property="model">
+      <string>i30 1.4</string>
+     </void>
+     <void property="name">
+      <string>HYUNDAI i30</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>85</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>no</string>
+     </void>
+     <void property="brand">
+      <string>RENAULT</string>
+     </void>
+     <void property="engine">
+      <string>Benzin</string>
+     </void>
+     <void property="id">
+      <int>16</int>
+     </void>
+     <void property="model">
+      <string>MEGANE 1.6</string>
+     </void>
+     <void property="name">
+      <string>RENAULT MEGANE</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>90</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>OPEL</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>17</int>
+     </void>
+     <void property="model">
+      <string>1.6 CDTi</string>
+     </void>
+     <void property="name">
+      <string>OPEL INSIGNIA</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>129</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>PORSCHE</string>
+     </void>
+     <void property="engine">
+      <string>Benzin</string>
+     </void>
+     <void property="id">
+      <int>18</int>
+     </void>
+     <void property="model">
+      <string>4.5</string>
+     </void>
+     <void property="name">
+      <string>PORSCHE CAYENNE</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>200</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>AUDI</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>19</int>
+     </void>
+     <void property="model">
+      <string>Q7 3.0 TDI</string>
+     </void>
+     <void property="name">
+      <string>AUDI Q7</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>209</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>no</string>
+     </void>
+     <void property="brand">
+      <string>BMW</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>20</int>
+     </void>
+     <void property="model">
+      <string>530d</string>
+     </void>
+     <void property="name">
+      <string>BMW 530d</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>230</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>MERCEDES</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>21</int>
+     </void>
+     <void property="model">
+      <string>E KLASA</string>
+     </void>
+     <void property="name">
+      <string>MERCEDES E KLASA</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>270</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>AUDI</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>22</int>
+     </void>
+     <void property="model">
+      <string>A6 3.0 TDI KARAVAN</string>
+     </void>
+     <void property="name">
+      <string>AUDI A6 KARAVAN</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>5</int>
+     </void>
+     <void property="price">
+      <int>238</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>yes</string>
+     </void>
+     <void property="brand">
+      <string>RENAULT</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>23</int>
+     </void>
+     <void property="model">
+      <string>1.9 TDI</string>
+     </void>
+     <void property="name">
+      <string>RENAULT TRAFIC</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>9</int>
+     </void>
+     <void property="price">
+      <int>300</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="sample.Vehicle">
+     <void property="available">
+      <string>no</string>
+     </void>
+     <void property="brand">
+      <string>VW</string>
+     </void>
+     <void property="engine">
+      <string>Diesel</string>
+     </void>
+     <void property="id">
+      <int>24</int>
+     </void>
+     <void property="model">
+      <string>MULTIVAN TDI</string>
+     </void>
+     <void property="name">
+      <string>VW MULTIVAN</string>
+     </void>
+     <void property="nmbDoors">
+      <int>5</int>
+     </void>
+     <void property="nmbSeats">
+      <int>9</int>
+     </void>
+     <void property="price">
+      <int>311</int>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

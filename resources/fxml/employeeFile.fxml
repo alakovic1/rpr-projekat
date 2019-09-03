@@ -122,5 +122,6 @@
             <Font name="Avenir Next Bold" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="XMLBttn" layoutX="489.0" layoutY="14.0" mnemonicParsing="false" onAction="#writeinXML" text="Write in XML" />
    </children>
 </AnchorPane>
